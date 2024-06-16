@@ -22,14 +22,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
   const [user, setUser] = useState<User>(userStorage);
 
-  const updateUser = (newUserData: Partial<User>) => {
-    let userNew : User = {
-      ...user,
-      ...newUserData
-    };
-    setUserLocale(userNew);
-    setUser(userNew);
-  };
+  const updateUser = (newUserData: User) => setUser(newUserData);
 
   const removeUser = () => {
     const user = {

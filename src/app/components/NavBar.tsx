@@ -16,7 +16,7 @@ export default function Navbar() {
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-success navbar-dark">
-                <div className="container-fluid">
+                <div className="container">
                     <a className="navbar-brand" href="#">
                         <img src={icon} alt="icon" width="30" height="24" className="d-inline-block align-text-top" />
                         Navbar
@@ -28,6 +28,14 @@ export default function Navbar() {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Home</Link>
+                            </li>
+
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/category">Categorias</Link>
+                            </li>
+
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/product">Productos</Link>
                             </li>
 
                             <li className="nav-item">

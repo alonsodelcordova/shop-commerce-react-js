@@ -1,32 +1,24 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/NavBar";
-import {  useUserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import LoaderComponent from "../components/Loader";
-import getPosts from "../services/post.services";
+import getPosts from "../services/post.service";
 import { Post } from "../types/Post";
 
 export function HomePage() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const { user } = useUserContext();
-    const navigation = useNavigate();
-
+    
     const cargarData = async() => {
         setPosts(await getPosts())
         setLoading(false);
     }
 
     useEffect(() => {
-        if (user.username=="") {
-            navigation('/login');
-        }
         cargarData();
 
     }, [])
     return (
         <>
-            <Navbar />
+            
             {loading && <LoaderComponent/>}
 
 
