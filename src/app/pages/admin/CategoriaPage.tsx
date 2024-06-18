@@ -43,7 +43,7 @@ export default function CategoriaPage() {
             <div className="row mt-3">
                 {categorias.map((categoria) => {
                     return (
-                        <div key={categoria.id} className="col-md-6 col-lg-4">
+                        <div key={categoria.id} className="col-md-6 col-lg-4 p-2">
                            <CardCategory {...categoria} />
                         </div>
                     );
