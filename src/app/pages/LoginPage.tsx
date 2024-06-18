@@ -57,7 +57,7 @@ export function LoginPage() {
                     </div>
                     {/* ir a  registrarse */}
                     <div className="d-grid mt-2">
-                        <button type="button" onClick={() => navigate('/register')} className="btn btn-lg">Registrarse</button>
+                        <button type="button" onClick={() => navigate('/public/register')} className="btn btn-lg">Registrarse</button>
                     </div>
                 </form>
             </div>

@@ -4,8 +4,8 @@ import { API_URL } from '../../const';
 
 // types.ts
 
-export interface ApiResponse {
-    data: any;
+export interface ApiResponse<T> {
+    data: T;
     status?: number;
     message?: string;
     isError: boolean;
@@ -19,7 +19,7 @@ const apiClient: AxiosInstance = axios.create({
     }
 });
 
-const handleApiResponse = (response: AxiosResponse): ApiResponse => {
+const handleApiResponse = (response: AxiosResponse): ApiResponse<any> => {
     return { 
         data: response.data, 
         status: response.status ,
@@ -28,7 +28,7 @@ const handleApiResponse = (response: AxiosResponse): ApiResponse => {
     };
 };
 
-const handleApiError = (error: any): ApiResponse => {
+const handleApiError = (error: any): ApiResponse<any> => {
     return { 
         data : null,
         message: error.response.data?.detail || 'Error desconocido', 
@@ -38,16 +38,35 @@ const handleApiError = (error: any): ApiResponse => {
 };
 
 
-export const getData = async (endpoint: string): Promise<ApiResponse > => {
+export const getData = async (endpoint: string, params:any[] = []): Promise<ApiResponse<any> > => {
     try {
-        const response = await apiClient.get(endpoint);
-        return handleApiResponse(response);
+       
+        if (params.length > 0) {
+            const response = await apiClient.get(
+                endpoint,
+                {
+                    params: {
+                        ...params
+                    }
+                }
+            );
+            return handleApiResponse(response);
+        }else{
+            const response = await apiClient.get(endpoint);
+            return handleApiResponse(response);
+        }
+
+
     } catch (error) {
         return handleApiError(error);
     }
 };
 
-export const postData = async (endpoint: string, data: any): Promise<ApiResponse> => {
+
+
+
+
+export const postData = async (endpoint: string, data: any): Promise<ApiResponse<any>> => {
     try {
         const response = await apiClient.post(endpoint, data);
         return handleApiResponse(response);

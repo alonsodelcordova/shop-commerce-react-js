@@ -9,7 +9,7 @@ export default function ShopLayout() {
 
     useEffect(() => {
         if (user.username=="") {
-            navigation('/login');
+            navigation('/public/login');
         }
 
     }, [])

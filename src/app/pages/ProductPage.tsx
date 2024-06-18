@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { getProducts } from "../services/product.service"
+import { Producto } from "../types/Product";
+import CardProducto from "../components/CardProduct";
 
 export default function ProductPage() {
 
 
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<Producto []>([]);
 
     const allProductos = async () => {
         const productsNew = await getProducts();
@@ -18,25 +20,18 @@ export default function ProductPage() {
 
 
     return (
-        <div>
-            <h1>ProductPage</h1>
+        <div className="container">
+            <div className="d-flex justify-content-between  my-2">
+                <h1>ProductPage</h1>
+                <button  className="btn btn-success">Agregar</button>
+            </div>
+            
+
+
             {products.map((product) => {
                 return (
-                    <div className="col-md-6 col-lg-6 p-2" key={product?.id}>
-                        <div className="card" style={{ height: '100%' }}>
-                            <div className="card-header">
-                                <h5 className="uppercase center">{product?.nombre}</h5>
-                            </div>
-                            <div className="card-body">
-                                <p className="post-body">{product.descripcion}</p>
-                            </div>
-                            <div className="card-footer">
-                                <button className="btn btn-danger">
-                                    Eliminar
-                                </button>
-                            </div>
-                        </div>
-
+                    <div className="col-md-6 col-lg-4 p-2" key={product?.id}>
+                       <CardProducto {...product} />
                     </div>
                 );
             }) }

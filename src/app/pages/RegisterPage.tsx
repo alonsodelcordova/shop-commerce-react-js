@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RegistrarUser } from "../services/users.service";
+import { useNavigate } from "react-router-dom";
 
 interface UserForm {
     nombres: string;
@@ -23,6 +24,7 @@ export default function RegisterPage() {
         password: ''
     });
 
+    const navigate = useNavigate();
 
     const onSubmit = async (e: React.FormEvent) => {
         
@@ -40,6 +42,7 @@ export default function RegisterPage() {
                 password: ''
             });
             alert('Usuario registrado con exito');
+            navigate('/public/login')
         } else {
             setError({
                 isError: true,

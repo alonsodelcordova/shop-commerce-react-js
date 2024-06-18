@@ -9,7 +9,7 @@ export default function Navbar() {
 
     const logout = () => {
         removeUser();
-        navigation('/login');
+        navigation('/public/login');
     }
 
 
