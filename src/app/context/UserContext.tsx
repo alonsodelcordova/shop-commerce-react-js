@@ -16,7 +16,7 @@ export const useUserContext = () => {
 
 
 
-export const UserProvider: React.FC = ({ children }) => {
+export const UserProvider = ({ children }:{children: React.ReactNode}) => {
 
   const userStorage = getUserLocale();
 

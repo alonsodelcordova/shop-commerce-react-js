@@ -3,7 +3,7 @@ import {  UserProvider } from './app/context/UserContext'
 import { RoutersShop } from './app/Routers'
 
 
-const App: React.FC = () => {
+const App = () => {
 
   return (
     <UserProvider>
