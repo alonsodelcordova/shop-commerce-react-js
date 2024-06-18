@@ -19,6 +19,13 @@ const apiClient: AxiosInstance = axios.create({
     }
 });
 
+const apiClientFormData: AxiosInstance = axios.create({
+    baseURL: API_URL,
+    headers: {
+        'Content-Type': 'multipart/form-data',
+    }
+});
+
 const handleApiResponse = (response: AxiosResponse): ApiResponse<any> => {
     return { 
         data: response.data, 
@@ -79,3 +86,12 @@ export const postData = async (endpoint: string, data: any): Promise<ApiResponse
         return handleApiError(error);
     }
 };
+
+export const putDataFormData = async (endpoint: string, data: any): Promise<ApiResponse<any>> => {
+    try {
+        const response = await apiClientFormData.put(endpoint, data);
+        return handleApiResponse(response);
+    } catch (error:any) {
+        return handleApiError(error);
+    }
+}

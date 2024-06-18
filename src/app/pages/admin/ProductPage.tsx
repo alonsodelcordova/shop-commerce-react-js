@@ -39,15 +39,13 @@ export default function ProductPage() {
             {products.map((product) => {
                 return (
                     <div className="col-md-6 col-lg-4 p-2" key={product?.id}>
-                        <CardProducto {...product} />
+                        <CardProducto producto={product} onUpdate={ ()=>allProductos() } />
                     </div>
                 );
             })}
             </div>
 
             <ModalFormProduct show={show} handleClose={handleClose} />
-
-          
         </div>
     )
 }

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
-import { LoginPage } from "./pages/admin/LoginPage";
+import { LoginPage } from "./pages/public/LoginPage";
 import RegisterPage from "./pages/public/RegisterPage";
 import PublicLayout from "./layouts/PublicLayout";
 import ShopLayout from "./layouts/ShopLayout";
 import CategoriaPage from "./pages/admin/CategoriaPage";
-import ProductPage from "./pages/public/ProductPage";
+import ProductPage from "./pages/admin/ProductPage";
 import IngresoProductoPage from "./pages/admin/IngresoProductoPage";
 import VentasProductPage from "./pages/admin/VentasProductPage";
 
