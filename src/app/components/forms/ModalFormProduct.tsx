@@ -13,7 +13,13 @@ export default function ModalFormProduct({
     handleClose
 }: ModalFormProductProps) {
 
-    const [productForm, setProductForm] = useState<Producto>({} as Producto);
+    const [productForm, setProductForm] = useState({
+        nombre: "",
+        descripcion: "",
+        precio_venta: 0,
+        subcategoria_id: 0
+    
+    });
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const [subcategorias, setSubcategorias] = useState<SubCategoria[]>([]);
 
@@ -22,16 +28,33 @@ export default function ModalFormProduct({
         setCategorias(categoriasNew.data);
     }
 
+    const limpiar = () => {
+        setProductForm({
+            nombre: "",
+            descripcion: "",
+            precio_venta: 0,
+            subcategoria_id: 0
+        });
+        setSubcategorias([]);
+    }
+
     const salir = () => {
+        limpiar();
         handleClose(false);
     }
 
     const onFormSubmit = async (e: any) => {
         e.preventDefault();
-        const respuesta = await saveProducto(productForm);
+        let product: Producto = {
+            nombre: productForm.nombre,
+            descripcion: productForm.descripcion,
+            precio_venta: productForm.precio_venta,
+            subcategoria_id: productForm.subcategoria_id
+        }
+        const respuesta = await saveProducto(product);
         if (respuesta.status === 200) {
             alert('Producto guardado');
-            setProductForm({} as Producto);
+            limpiar();
             handleClose(true);
         } else {
             alert(respuesta.message);
@@ -83,16 +106,19 @@ export default function ModalFormProduct({
                     <div className="form-group my-2">
                         <label htmlFor="nombre">Nombre</label>
                         <input type="text" className="form-control" id="nombre" name="nombre"
+                            value={productForm.nombre || ""}
                             onChange={(e) => setProductForm({ ...productForm, nombre: e.target.value })} />
                     </div>
                     <div className="form-group my-2">
                         <label htmlFor="descripcion">Descripcion</label>
                         <input type="text" className="form-control" id="descripcion" name="descripcion"
+                            value={productForm.descripcion || ""}
                             onChange={(e) => setProductForm({ ...productForm, descripcion: e.target.value })} />
                     </div>
                     <div className="form-group my-2">
                         <label htmlFor="precio_venta">Precio</label>
                         <input type="number" className="form-control" id="precio_venta" name="precio_venta"
+                            value={productForm.precio_venta || ""}
                             onChange={(e) => setProductForm({ ...productForm, precio_venta: parseInt(e.target.value) })} />
                     </div>
 

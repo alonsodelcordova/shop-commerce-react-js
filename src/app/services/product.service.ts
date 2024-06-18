@@ -1,4 +1,4 @@
-import { Producto } from "../types/Product";
+import { Categoria, Producto } from "../types/Product";
 import { ApiResponse, getData, getUrl, postData } from "../utils/main.service";
 
 
@@ -17,4 +17,9 @@ export async function getCategorias(skip:number=0, limit:number=20) {
 
 export function getReporteStocks(producto_id:number): String {
     return getUrl('productos/reporte_stocks/'+producto_id);
+}
+
+
+export function saveCategoryPost(category: Categoria): Promise<ApiResponse<Categoria>>{
+    return postData('categorias', category);
 }

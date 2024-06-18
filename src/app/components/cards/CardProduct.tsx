@@ -13,7 +13,7 @@ export default function CardProducto(producto:Producto) {
     const handleShow = () => setShow(true);
 
     const verStocks =  () => {
-        let data = getReporteStocks(producto.id)
+        let data = getReporteStocks(producto?.id || 0)
         setPdf(data);
         handleShow();
     }
@@ -33,9 +33,9 @@ export default function CardProducto(producto:Producto) {
                     </span>
                 </div>
                 <div className="card-footer d-flex justify-content-between">
-                    <button className="btn btn-danger">
+                    {/*<button className="btn btn-danger">
                         Eliminar
-                    </button>
+                    </button>*/}
                     <button className="btn btn-info" onClick={verStocks}>
                         Stocks
                     </button>
