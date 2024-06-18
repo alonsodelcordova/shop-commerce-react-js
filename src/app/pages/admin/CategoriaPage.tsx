@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { getCategorias } from "../services/product.service"
-import { Categoria } from "../types/Product";
+import { getCategorias } from "../../services/product.service"
+import { Categoria } from "../../types/Product";
 
 export default function CategoriaPage() {
 
@@ -11,13 +11,25 @@ export default function CategoriaPage() {
         setCategorias(categoriasNew.data);
     }
 
+    const agregar = () => {
+        
+    }
+
     useEffect(() => {
         getAllCategorias();
     }, []);
 
     return (
         <div className="container my-2">
-            <h1>CATEGORIAS</h1>
+            <div className="d-flex justify-content-between">
+                <h1>CATEGORIAS</h1>
+                <div>
+                    <button className="btn btn-success" 
+                        onClick={agregar}
+                    >Agregar</button>
+                </div>
+            </div>
+
             <div className="row mt-3">
                 {categorias.map((categoria) => {
                     return (

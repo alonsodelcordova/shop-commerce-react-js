@@ -37,6 +37,10 @@ const handleApiError = (error: any): ApiResponse<any> => {
     };
 };
 
+export const getUrl = (endpoint: string): string => {
+    return `${API_URL}${endpoint}`;
+}
+
 
 export const getData = async (endpoint: string, params:any[] = []): Promise<ApiResponse<any> > => {
     try {

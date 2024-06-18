@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RegistrarUser } from "../services/users.service";
+import { RegistrarUser } from "../../services/users.service";
 import { useNavigate } from "react-router-dom";
 
 interface UserForm {
@@ -52,10 +52,9 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="container p-4">
             <div className="card">
-                <div className="card-body">
-                    <h5>Registrame</h5>
+                <div className="card-body  min-vw-50">
+                    <h5>Registrame en Shop tiendas</h5>
                     { error.isError &&  
                         <div className="alert alert-danger alert-dismissible fade show" role="alert" >
                             <h5>{error.message}</h5>
@@ -98,6 +97,5 @@ export default function RegisterPage() {
                     </form>
                 </div>
             </div>
-        </div>
     )
 }

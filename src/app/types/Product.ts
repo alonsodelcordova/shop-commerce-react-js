@@ -4,6 +4,8 @@ export interface Producto{
     descripcion:String;
     precio_venta: number;
     imagen: String;
+    subcategoria_id?: number;
+    usuario_id?: number;
 }
 
 export interface Categoria{
