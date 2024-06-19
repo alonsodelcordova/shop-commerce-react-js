@@ -3,7 +3,7 @@ import { ApiResponse, getData, postData } from "../utils/main.service";
 
 
 export async  function  getIngresos(skip=0, limit=100): Promise<ApiResponse<Ingreso[]>>{
-    return  await getData('ingresos', [skip, limit]);
+    return  await getData('ingresos', {skip, limit});
 }
 
 export async function saveIngreso(data:Ingreso): Promise<ApiResponse<Ingreso>> {

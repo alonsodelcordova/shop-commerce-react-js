@@ -8,8 +8,8 @@ export async  function  getProducts(): Promise<ApiResponse<Producto>>{
 }
 
 
-export async  function  getProductsPaginate(): Promise<ApiResponse<ListDataResponse<Producto>>>{
-    return  await getData('productos');
+export async  function  getProductsPaginate(skip:number = 0, limit:number=10): Promise<ApiResponse<ListDataResponse<Producto>>>{
+    return  await getData('productos',{skip, limit});	
 }
 
 export async function saveProducto(product: Producto): Promise<ApiResponse<Producto>> {
@@ -17,7 +17,7 @@ export async function saveProducto(product: Producto): Promise<ApiResponse<Produ
 }
 
 export async function getCategorias(skip:number=0, limit:number=20) {
-    return await getData('categorias', [skip, limit]);
+    return await getData('categorias', {skip, limit});
 }
 
 export function getReporteStocks(producto_id:number): String {

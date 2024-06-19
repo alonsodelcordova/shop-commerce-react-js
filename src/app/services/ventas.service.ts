@@ -4,7 +4,7 @@ import { ApiResponse, getData, postData } from "../utils/main.service";
 
 
 export async  function  getVentas(skip=0, limit=100): Promise<ApiResponse<Venta[]>>{
-    return  await getData('ventas', [skip, limit]);
+    return  await getData('ventas', {skip, limit});
 }
 
 

@@ -55,10 +55,9 @@ export const getUrl = (endpoint: string): string => {
 }
 
 
-export const getData = async (endpoint: string, params:any[] = []): Promise<ApiResponse<any> > => {
+export const getData = async (endpoint: string, params:any = null): Promise<ApiResponse<any> > => {
     try {
-       
-        if (params.length > 0) {
+        if (params != null) {
             const response = await apiClient.get(
                 endpoint,
                 {
