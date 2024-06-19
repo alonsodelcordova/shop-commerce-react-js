@@ -220,7 +220,7 @@ export default function ModalFormIngresoProducto({ show, handleClose }: ModalFor
                     Cancelar
                 </button>
                 <button className="btn btn-primary" type="button" onClick={onSaveIngreso}>
-                    GUARDAR INGRESO
+                    Guardar Ingreso
                 </button>
             </Modal.Footer>
         </Modal>

@@ -8,6 +8,7 @@ import CategoriaPage from "./pages/admin/CategoriaPage";
 import ProductPage from "./pages/admin/ProductPage";
 import IngresoProductoPage from "./pages/admin/IngresoProductoPage";
 import VentasProductPage from "./pages/admin/VentasProductPage";
+import ClientePage from "./pages/admin/ClientePage";
 
 export const RoutersShop = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ export const RoutersShop = createBrowserRouter([
             {
                 element: <VentasProductPage />,
                 path : 'venta'
+            },
+            {
+                element: <ClientePage />,
+                path : 'cliente'
             }
         ]
     },
