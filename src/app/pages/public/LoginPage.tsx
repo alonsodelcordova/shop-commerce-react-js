@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import icon from '../../../assets/react.svg';
+import icon from '/assets/logo2.jpeg';
 import { useUserContext } from "../../context/UserContext";
 import { UserLogin } from "../../types/User";
 import { LoginUser } from "../../services/users.service";
@@ -33,12 +33,13 @@ export function LoginPage() {
     }, [])
 
     return (
-        <div className="card bg-success p-4 text-white">
+        <div className="card bg-success p-4 text-white my-2">
             <form className="card-body  min-vw-50" onSubmit={handleSubmit}>
-                <h1 className="center">
-                    <img src={icon} alt="icon" width="50" height="50" className="d-inline-block align-text-top" />
-                    Bienenido al System Shop
-                </h1>
+                <div className="text-center">
+                    <img src={icon} alt="icon" width="300" height="300" className="d-block mx-auto mb-2" />
+                    <h1 > Bienenido al JacShop</h1>
+                </div>
+
                 <div className="form-group my-3">
                     <label htmlFor="username">Username</label>
                     <input type="text" className="form-control" id="username" required
@@ -54,7 +55,7 @@ export function LoginPage() {
                 </div>
                 {/* ir a  registrarse */}
                 <div className="d-grid mt-2">
-                    <button type="button" onClick={() => navigate('/public/register')} className="btn btn-lg">Registrarse</button>
+                    <button type="button" onClick={() => navigate('/public/register')} className="btn btn-lg text-white">Registrarse</button>
                 </div>
             </form>
         </div>

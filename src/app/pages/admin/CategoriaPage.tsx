@@ -34,7 +34,7 @@ export default function CategoriaPage() {
     }, []);
 
     return (
-        <div className="container my-2">
+        <div className="container my-4">
             <div className="d-flex justify-content-between">
                 <h1>CATEGORIAS</h1>
                 <div>

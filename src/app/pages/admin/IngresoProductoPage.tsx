@@ -53,7 +53,7 @@ export default function IngresoProductoPage () {
             <table className="table table-bordered my-2 table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th># GUIA</th>
                         <th>Fecha</th>
                         <th>Vehiculo</th>
                         <th>Detalles</th>

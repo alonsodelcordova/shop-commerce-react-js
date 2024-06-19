@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RegistrarUser } from "../../services/users.service";
 import { useNavigate } from "react-router-dom";
+import photo from '/assets/logo2.jpeg';
 
 interface UserForm {
     nombres: string;
@@ -52,9 +53,12 @@ export default function RegisterPage() {
     }
 
     return (
-            <div className="card">
-                <div className="card-body  min-vw-50">
-                    <h5>Registrame en Shop tiendas</h5>
+            <div className="card bg-success text-white">
+                <div className="card-body  min-vw-50 p-4">
+                    <div className="text-center">
+                        <img src={photo} alt="icon" width="300" height="300" className="d-block mx-auto mb-2" />
+                        <h1 > Registrame en JacShop</h1>
+                    </div>
                     { error.isError &&  
                         <div className="alert alert-danger alert-dismissible fade show" role="alert" >
                             <h5>{error.message}</h5>
@@ -64,28 +68,28 @@ export default function RegisterPage() {
                         </div>
                     }
                     <form onSubmit={onSubmit}>
-                        <div className="form-group">
+                        <div className="form-group my-1">
                             <label htmlFor="nombres">Nombres</label>
                             <input type="text" className="form-control" id="nombres" required
                                 onChange={(e) => setUser({ ...user, nombres: e.target.value })} />
 
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-1">
                             <label htmlFor="apellidos">Apellidos</label>
                             <input type="text" className="form-control" id="apellidos" required
                                 onChange={(e) => setUser({ ...user, apellidos: e.target.value })} />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-1">
                             <label htmlFor="email">Email</label>
                             <input type="email" className="form-control" id="email" required
                                 onChange={(e) => setUser({ ...user, email: e.target.value })} />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-1">
                             <label htmlFor="password">Password</label>
                             <input type="password" className="form-control" id="password" required
                                 onChange={(e) => setUser({ ...user, password: e.target.value })} />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group my-1">
                             <label htmlFor="password2">Confirm Password</label>
                             <input type="password" className="form-control" id="password2" required
                                 onChange={(e) => setUser({ ...user, password2: e.target.value })} />
