@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getProducts } from "../../services/product.service"
+import { getProductsPaginate } from "../../services/product.service"
 import { Producto } from "../../types/Product";
 import CardProducto from "../../components/cards/CardProduct";
 import ModalFormProduct from "../../components/forms/ModalFormProduct";
@@ -22,8 +22,8 @@ export default function ProductPage() {
 
     const allProductos = async () => {
         setLoading(true);
-        const productsNew = await getProducts();
-        setProducts(productsNew.data);
+        const productsNew = await getProductsPaginate();
+        setProducts(productsNew.data.data);
         setLoading(false);
     }
 

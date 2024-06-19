@@ -11,6 +11,12 @@ export interface ApiResponse<T> {
     isError: boolean;
 }
 
+export interface ListDataResponse<T>{
+    data : T[]
+    limit: number
+    skip: number
+    total: number
+}
 
 const apiClient: AxiosInstance = axios.create({
     baseURL: API_URL,

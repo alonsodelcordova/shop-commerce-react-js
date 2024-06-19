@@ -1,9 +1,14 @@
 import { Categoria, Producto } from "../types/Product";
-import { ApiResponse, getData, getUrl, postData, putDataFormData } from "../utils/main.service";
+import { ApiResponse, ListDataResponse, getData, getUrl, postData, putDataFormData } from "../utils/main.service";
 
 
 
-export async  function  getProducts(): Promise<ApiResponse<Producto[]>>{
+export async  function  getProducts(): Promise<ApiResponse<Producto>>{
+    return  await getData('productos/by_list');
+}
+
+
+export async  function  getProductsPaginate(): Promise<ApiResponse<ListDataResponse<Producto>>>{
     return  await getData('productos');
 }
 
