@@ -5,9 +5,9 @@ export interface Ingreso {
     nro_guia: string;
     vehiculo: string;
     descripcion: string;
-    total: number;
+    total?: number;
     usuario_id?: number;
-    fecha_registro: string;
+    fecha_registro?: string;
     detalles: DetalleIngreso[];
 }
 

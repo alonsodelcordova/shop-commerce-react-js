@@ -4,6 +4,7 @@ import { DetalleIngreso, Ingreso } from "../../types/Ingreso";
 import { formatFecha } from "../../utils/formats";
 import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../components/Loader";
+import ModalFormIngresoProducto from "../../components/forms/ModalFormIngresoProducto";
 
 
 export default function IngresoProductoPage () {
@@ -12,6 +13,19 @@ export default function IngresoProductoPage () {
     const [showDetalles, setShowDetalles] = useState(false);
     const [detalles, setDetalles] = useState<DetalleIngreso[]>([]);
     const [loading, setLoading] = useState(false);
+
+    const [showForm, setShowForm] = useState(false);
+
+    const handleShowForm = () => {
+        setShowForm(true);
+    }
+
+    const handleHideForm = (e:boolean) => {
+        setShowForm(false);
+        if (e) {
+            allIngresos();
+        }
+    }
 
     const handleShowDetalles = (id:number) => {
         let ingreso = ingresos.find(ingreso => ingreso.id == id);
@@ -44,7 +58,9 @@ export default function IngresoProductoPage () {
             <div className="d-flex justify-content-between">
                 <h1>INGRESOS</h1>
                 <div>
-                    <button className="btn btn-success">Agregar</button>
+                    <button className="btn btn-success"
+                        onClick={handleShowForm}
+                    >Agregar</button>
                 </div>
             </div>
 
@@ -66,7 +82,7 @@ export default function IngresoProductoPage () {
                         return (
                             <tr key={ingreso.id}>
                                 <td>{ingreso.id} - {ingreso.nro_guia}</td>
-                                <td>{formatFecha(ingreso.fecha_registro)}</td>
+                                <td>{formatFecha(ingreso?.fecha_registro||'')}</td>
                                 <td>{ingreso.vehiculo}</td>
                                 <td>
                                     # {ingreso.detalles.length} 
@@ -82,6 +98,8 @@ export default function IngresoProductoPage () {
                     })}
                 </tbody>
             </table>
+
+            <ModalFormIngresoProducto show={showForm} handleClose={handleHideForm} />
             
             <Modal show={showDetalles} onHide={handleHideDetalles}>
                 <Modal.Header>
