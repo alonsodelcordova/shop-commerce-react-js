@@ -17,4 +17,5 @@ export interface DetalleIngreso {
     cantidad: number;
     precio_unitario: number;
     total: number;
+    producto_nombre: string;
 }

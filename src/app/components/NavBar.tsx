@@ -8,6 +8,9 @@ export default function Navbar() {
 
 
     const logout = () => {
+
+        const result = window.confirm('¿Está seguro de cerrar sesión?');
+        if (!result) return;
         removeUser();
         navigation('/public/login');
     }

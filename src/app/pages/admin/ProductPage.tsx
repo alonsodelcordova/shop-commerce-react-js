@@ -3,11 +3,13 @@ import { getProducts } from "../../services/product.service"
 import { Producto } from "../../types/Product";
 import CardProducto from "../../components/cards/CardProduct";
 import ModalFormProduct from "../../components/forms/ModalFormProduct";
+import LoaderComponent from "../../components/Loader";
 
 export default function ProductPage() {
 
     const [show, setShow] = useState(false);
     const [products, setProducts] = useState<Producto[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const handleShow = () => setShow(true);
 
@@ -19,8 +21,10 @@ export default function ProductPage() {
     };
     
     const allProductos = async () => {
+        setLoading(true);
         const productsNew = await getProducts();
         setProducts(productsNew.data);
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -30,10 +34,13 @@ export default function ProductPage() {
 
     return (
         <div className="container my-3">
+            
             <div className="d-flex justify-content-between  my-2">
                 <h1>PRODUCTOS</h1>
                 <button className="btn btn-success" onClick={handleShow}>Agregar</button>
             </div>
+
+            {loading && <LoaderComponent/>}
 
             <div className="row">
             {products.map((product) => {

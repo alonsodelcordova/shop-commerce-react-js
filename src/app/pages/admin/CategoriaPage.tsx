@@ -3,11 +3,13 @@ import { getCategorias } from "../../services/product.service"
 import { Categoria } from "../../types/Product";
 import CardCategory from "../../components/cards/CardCategory";
 import ModalFormCategory from "../../components/forms/ModalFormCategory";
+import LoaderComponent from "../../components/Loader";
 
 export default function CategoriaPage() {
 
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [loading, setLoading] = useState(false);
 
     const handleClose = (e: Boolean) => {
         if (e) {
@@ -17,8 +19,10 @@ export default function CategoriaPage() {
     };
 
     const getAllCategorias = async () => {
+        setLoading(true);
         const categoriasNew = await getCategorias();
         setCategorias(categoriasNew.data);
+        setLoading(false);
     }
 
     const agregar = () => {
@@ -39,6 +43,8 @@ export default function CategoriaPage() {
                     >Agregar</button>
                 </div>
             </div>
+
+            {loading && <LoaderComponent/>}
 
             <div className="row mt-3">
                 {categorias.map((categoria) => {

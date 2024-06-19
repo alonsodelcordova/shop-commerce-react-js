@@ -18,6 +18,7 @@ export interface DetalleVenta{
     precio_unitario: number;
     total: number;
     id: number;
+    producto_nombre: string;
 }
 
 /*
