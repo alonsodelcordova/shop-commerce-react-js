@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { getVentas } from "../../services/ventas.service";
-import { DetalleVenta, Venta } from "../../types/Ventas";
+import { Venta } from "../../types/Ventas";
 import { formatFecha } from "../../utils/formats";
 import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../components/Loader";
+import ModalFormVenta from "../../components/forms/ModalFormVenta";
 
 
 
@@ -13,13 +14,26 @@ export default function VentasProductPage() {
     const [ventas, setVentas] = useState<Venta[]>([]);
 
     const [showDetalles, setShowDetalles] = useState(false)
-    const [detalles, setDetalles] = useState<DetalleVenta[]>([])
+    const [ventaSelect, setVentaSelect] = useState<Venta | null>(null)
     const [loading, setLoading] = useState(false);
+
+    const [showModalVenta, setShowModalVenta] = useState(false);
+
+    const handleShowModalVenta = () => {
+        setShowModalVenta(true);
+    }
+
+    const handleHideModalVenta = (e: boolean) => {
+        if (e) {
+            allVentas();
+        }
+        setShowModalVenta(false);
+    }
 
     const handleShowDetalles = (id: number) => {
         let venta = ventas.find(venta => venta.id == id);
         if (venta) {
-            setDetalles(venta?.detalles || []);
+            setVentaSelect(venta);
             setShowDetalles(true)
         } else {
             alert('No cuanta con detalles de venta')
@@ -27,7 +41,7 @@ export default function VentasProductPage() {
     }
 
     const handleHideDetalles = () => {
-        setDetalles([])
+        setVentaSelect(null)
         setShowDetalles(false)
     }
 
@@ -51,13 +65,15 @@ export default function VentasProductPage() {
             <div className="d-flex justify-content-between">
                 <h2>Ventas</h2>
                 <div>
-                    <button className="btn btn-primary btn-sm">Nueva venta</button>
+                    <button className="btn btn-primary btn-sm"
+                        onClick={handleShowModalVenta}
+                    >Nueva venta</button>
                 </div>
             </div>
 
-            {loading && <LoaderComponent/>}
+            {loading && <LoaderComponent />}
 
-            <table className="table my-2">
+            <table className="table my-2 table-bordered">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -72,9 +88,9 @@ export default function VentasProductPage() {
                     {ventas.map((venta, index) => (
                         <tr key={index}>
                             <td>{venta.id}</td>
-                            <td>{formatFecha(venta.fecha_registro)}</td>
+                            <td>{formatFecha(venta?.fecha_registro || '')}</td>
                             <td>{venta.razon_social}</td>
-                            <td># {venta.detalles.length}</td>
+                            <td>{venta.tipo_comprobante}: # {venta.detalles.length}</td>
                             <td>S/. {venta.total}</td>
                             <td>
                                 <button className="btn btn-info btn-sm"
@@ -85,6 +101,8 @@ export default function VentasProductPage() {
                     ))}
                 </tbody>
             </table>
+
+            <ModalFormVenta show={showModalVenta} handleClose={handleHideModalVenta} />
 
             <Modal show={showDetalles} onHide={handleHideDetalles}>
                 <Modal.Header closeButton>
@@ -97,25 +115,36 @@ export default function VentasProductPage() {
                                 <th>Producto</th>
                                 <th>Cantidad</th>
                                 <th>Precio</th>
-                                <th>Subtotal</th>
+                                <th className="text-end">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {detalles.map((detalle, index) => (
+                            {ventaSelect?.detalles.map((detalle, index) => (
                                 <tr key={index}>
                                     <td>{detalle.producto_nombre}</td>
                                     <td>{detalle.cantidad}</td>
                                     <td>S/. {detalle.precio_unitario}</td>
-                                    <td>S/. {detalle.total}</td>
+                                    <td className="text-end">S/. {detalle.total}</td>
                                 </tr>
                             ))}
                         </tbody>
-                        <tfoot>
+                    </table>
+                    <table className="table table-sm">
+                        <tbody>
                             <tr>
-                                <td colSpan={3}>Total</td>
-                                <td>S/. {detalles.reduce((acc, item) => acc + item.total, 0)}</td>
+                                <td>SubTotal:</td>
+                                <td className="text-end">S/. {ventaSelect?.subtotal}</td>
                             </tr>
-                        </tfoot>
+                            <tr>
+                                <td>IGV:</td>
+                                <td className="text-end">S/. {ventaSelect?.igv}</td>
+                            </tr>
+                            <tr>
+                                <td>Total:</td>
+                                <td className="text-end">S/. {ventaSelect?.total}</td>
+                            </tr>
+                        </tbody>
+
                     </table>
                 </Modal.Body>
                 <Modal.Footer>

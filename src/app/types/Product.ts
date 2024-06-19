@@ -6,6 +6,7 @@ export interface Producto{
     imagen?: string;
     subcategoria_id?: number;
     usuario_id?: number;
+    stock_actual?: number;
 }
 
 export interface Categoria{
