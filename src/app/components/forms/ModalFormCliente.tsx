@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Cliente } from "../../types/Cliente"
 import { Modal } from "react-bootstrap"
 import { saveCliente } from "../../services/clientes.service";
+import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
 
 interface ModalFormClienteProps {
     show: boolean;
@@ -35,17 +36,17 @@ export default function ModalFormCliente({show, handleClose}: ModalFormClientePr
     const onSaveCliente = async () => {
         
         if (clienteForm.nombres == "" || clienteForm.apellidos == "" || clienteForm.tipo_documento == "" || clienteForm.numero_documento == "" || clienteForm.direccion == "" || clienteForm.email == "" || clienteForm.celular == "") {
-            alert("Todos los campos son requeridos")
+            errorAlerta("Todos los campos son requeridos")
             return
         }
 
         const data = await saveCliente(clienteForm)
         if (data.status == 200) {
-            alert("Cliente registrado correctamente")
+            timerSuccessAlert("Cliente registrado correctamente")
             clearFormCliente()
             handleClose(true)
         } else {
-            alert(data.message)
+            errorAlerta(data.message||"")
         }
     }
 

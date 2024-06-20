@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Categoria, Producto, SubCategoria } from "../../types/Product";
 import { getCategorias, saveProducto } from "../../services/product.service";
+import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
 
 interface ModalFormProductProps {
     show: boolean;
@@ -45,6 +46,17 @@ export default function ModalFormProduct({
 
     const onFormSubmit = async (e: any) => {
         e.preventDefault();
+
+        if(productForm.subcategoria_id == 0){
+            errorAlerta('Seleccione una subcategoria');
+            return;
+        }
+
+        if (productForm.nombre == "" || productForm.descripcion == "" || productForm.precio_venta == 0) {
+            errorAlerta('Complete los campos');
+            return;
+        }
+
         let product: Producto = {
             nombre: productForm.nombre,
             descripcion: productForm.descripcion,
@@ -53,11 +65,11 @@ export default function ModalFormProduct({
         }
         const respuesta = await saveProducto(product);
         if (respuesta.status === 200) {
-            alert('Producto guardado');
+            timerSuccessAlert('Producto guardado');
             limpiar();
             handleClose(true);
         } else {
-            alert(respuesta.message);
+            errorAlerta(respuesta.message||"");
         }
     }
 

@@ -4,6 +4,7 @@ import { Producto } from "../../types/Product";
 import { getProducts } from "../../services/product.service";
 import { DetalleIngreso, Ingreso } from "../../types/Ingreso";
 import { saveIngreso } from "../../services/ingresos.service";
+import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
 
 interface ModalFormIngresoProductoProps {
     show: boolean;
@@ -52,11 +53,11 @@ export default function ModalFormIngresoProducto({ show, handleClose }: ModalFor
 
     const onSaveDetalle = () => {
         if (detalleForm.producto_id == 0) {
-            alert("seleccione un producto")
+            errorAlerta("seleccione un producto")
             return
         }
         if(detalles.find(el => el.producto_id == detalleForm.producto_id)){
-            alert("Producto ya agregado, seleccione otro")
+            errorAlerta("Producto ya agregado, seleccione otro")
             return
         }
         let producto = productos.find(el => el.id == detalleForm.producto_id);
@@ -73,11 +74,11 @@ export default function ModalFormIngresoProducto({ show, handleClose }: ModalFor
 
     const onSaveIngreso = async () => {
         if (detalles.length == 0) {
-            alert("Ingrese al menos un detalle")
+            errorAlerta("Ingrese al menos un detalle")
             return
         }
         if (ingresoForm.nro_guia == '' || ingresoForm.vehiculo == '') {
-            alert("Ingrese Nº de guia y vehiculo")
+            errorAlerta("Ingrese Nº de guia y vehiculo")
             return
         }
 
@@ -88,12 +89,12 @@ export default function ModalFormIngresoProducto({ show, handleClose }: ModalFor
 
         const data = await saveIngreso(ingreso)
         if (data.status == 200) {
-            alert("Se registró correctamente")
+            timerSuccessAlert("Se registró correctamente")
             clearFormDetalle()
             clearFormIngreso()
             handleClose(true)
         } else {
-            alert(data.message)
+            errorAlerta(data.message||"")
         }
     }
 

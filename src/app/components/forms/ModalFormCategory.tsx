@@ -3,6 +3,7 @@ import { SubCategoria } from "../../types/Product";
 import { Modal } from "react-bootstrap";
 import { saveCategoryPost } from "../../services/product.service";
 import { FaPlus } from "react-icons/fa";
+import { errorAlerta,  timerSuccessAlert } from "../../utils/alerts";
 
 interface ModalFormCategoryProps {
     show: boolean;
@@ -40,7 +41,7 @@ export default function ModalFormCategory(props: ModalFormCategoryProps) {
 
     const agregarSubcategoria = () => {
         if (subCategoriaForm.nombre == "" || subCategoriaForm.descripcion == "") {
-            alert('Complete los campos');
+            errorAlerta('Complete los campos');
             return;
         }
         setSubcategorias([...subcategorias, subCategoriaForm]);
@@ -56,11 +57,11 @@ export default function ModalFormCategory(props: ModalFormCategoryProps) {
 
     const saveCategory = async () => {
         if (categoriaForm.nombre == "" || categoriaForm.descripcion == "") {
-            alert('Complete los campos');
+            errorAlerta('Complete los campos');
             return;
         }
         if (subcategorias.length == 0) {
-            alert('Debe agregar al menos una subcategoria');
+            errorAlerta('Debe agregar al menos una subcategoria');
             return;
         }
 
@@ -71,11 +72,11 @@ export default function ModalFormCategory(props: ModalFormCategoryProps) {
             subcategorias: subcategorias
         });
         if (respCategory.status == 200) {
-            alert('Categoria guardada');
+            timerSuccessAlert('Categoria guardada');
             limpiar();
             props.handleClose(true);
         } else {
-            alert(respCategory.message);
+            errorAlerta(respCategory.message||"");
         }
     }
 

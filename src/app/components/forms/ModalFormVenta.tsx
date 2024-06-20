@@ -6,6 +6,7 @@ import { Cliente } from "../../types/Cliente";
 import { getClientes } from "../../services/clientes.service";
 import { DetalleVenta, Venta } from "../../types/Ventas";
 import { saveVenta } from "../../services/ventas.service";
+import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
 
 interface ModalFormVentaProps {
     show: boolean;
@@ -32,11 +33,11 @@ export default function ModalFormVenta({ show, handleClose }: ModalFormVentaProp
 
     const onSubmitVenta = async () => {
         if (ventaForm.tipo_comprobante == "" || ventaForm.cliente_id == "") {
-            alert("Complete los campos");
+            errorAlerta("Complete los campos");
             return;
         }
         if (detalleVenta.length == 0) {
-            alert("Agregue al menos un detalle");
+            errorAlerta("Agregue al menos un detalle");
             return;
         }
         let venta: Venta = {
@@ -46,12 +47,12 @@ export default function ModalFormVenta({ show, handleClose }: ModalFormVentaProp
         }
         const data = await saveVenta(venta);
         if (data.status == 200) {
-            alert("Venta registrada correctamente");
+            timerSuccessAlert("Venta registrada correctamente");
             handleClose(true);
             clearFormVentas();
             clearFormDetalle();
         } else {
-            alert(data.message);
+            errorAlerta(data.message||"");
         }
 
     }
@@ -90,12 +91,12 @@ export default function ModalFormVenta({ show, handleClose }: ModalFormVentaProp
     const saveDetalleVenta = () => {
         let producto = productos.find((producto) => producto.id == parseInt(detalleForm.producto_id));
         if (!producto) {
-            alert("Seleccione un producto");
+            errorAlerta("Seleccione un producto");
             return;
         }
 
         if (detalleVenta.find((detalle) => detalle.producto_id == producto.id)) {
-            alert("El producto ya fue agregado");
+            errorAlerta("El producto ya fue agregado");
             return;
         }
 

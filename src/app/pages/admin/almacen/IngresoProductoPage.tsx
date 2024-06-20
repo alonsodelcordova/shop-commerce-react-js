@@ -6,6 +6,7 @@ import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../../components/Loader";
 import ModalFormIngresoProducto from "../../../components/forms/ModalFormIngresoProducto";
 import { FaEye, FaPlus } from "react-icons/fa";
+import { errorAlerta } from "../../../utils/alerts";
 
 
 export default function IngresoProductoPage() {
@@ -43,7 +44,7 @@ export default function IngresoProductoPage() {
         if (data.status == 200) {
             setIngresos(data.data);
         } else {
-            alert('Error al cargar los ingresos');
+            errorAlerta('Error al cargar los ingresos');
         }
         setLoading(false);
     }

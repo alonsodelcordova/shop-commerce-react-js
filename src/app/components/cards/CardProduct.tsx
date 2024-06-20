@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { getUrl } from "../../utils/main.service";
 import { FaSquarePollVertical } from "react-icons/fa6";
 import { GrUpdate } from "react-icons/gr";
+import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
 
 interface CardProductoProps {
     producto: Producto;
@@ -34,10 +35,11 @@ export default function CardProducto({ producto, onUpdate }: CardProductoProps) 
     const guardarImagen = async () => {
         const data = await saveImagenProducto(producto?.id || 0, image);
         if (data.status === 200) {
+            timerSuccessAlert("Imagen actualizada con éxito.");
             handleCloseImage();
             onUpdate();
         } else {
-            alert(data.message);
+            errorAlerta(data.message||"");
         }
     }
 

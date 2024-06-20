@@ -3,6 +3,7 @@ import { RegistrarUser } from "../../services/users.service";
 import { useNavigate } from "react-router-dom";
 import photo from '/assets/logo2.jpeg';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
 
 interface UserForm {
     nombres: string;
@@ -35,7 +36,7 @@ export default function RegisterPage() {
 
         e.preventDefault();
         if (user.password !== user.password2) {
-            alert('Las contraseñas no coinciden');
+            errorAlerta('Las contraseñas no coinciden');
             return;
         }
         const resp = await RegistrarUser(user);
@@ -46,7 +47,7 @@ export default function RegisterPage() {
                 email: '',
                 password: ''
             });
-            alert('Usuario registrado con exito');
+            timerSuccessAlert('Usuario registrado con exito');
             navigate('/public/login')
         } else {
             setError({

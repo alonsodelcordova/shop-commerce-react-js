@@ -5,6 +5,7 @@ import { FaBuromobelexperte, FaCertificate, FaDelicious, FaMoneyBill, FaTable, F
 import { GrConfigure } from "react-icons/gr";
 import { CiLogout } from "react-icons/ci";
 import { FaArrowRightToCity, FaHouse, FaShop, FaSquarePollVertical } from "react-icons/fa6";
+import { confirmAlert, timerSuccessAlert } from "../utils/alerts";
 
 
 
@@ -14,11 +15,11 @@ export default function NavbarComponent() {
 
 
     const logout = () => {
-
-        const result = window.confirm('¿Está seguro de cerrar sesión?');
-        if (!result) return;
-        removeUser();
-        navigation('/public/login');
+        confirmAlert("¿Está seguro de cerrar sesión?", ()=>{
+            removeUser();
+            timerSuccessAlert('Sesión cerrada');
+            navigation('/public/login');
+        })
     }
 
 

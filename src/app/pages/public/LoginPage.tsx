@@ -4,6 +4,7 @@ import icon from '/assets/logo2.jpeg';
 import { useUserContext } from "../../context/UserContext";
 import { UserLogin } from "../../types/User";
 import { LoginUser } from "../../services/users.service";
+import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
 
 export function LoginPage() {
 
@@ -20,9 +21,10 @@ export function LoginPage() {
         const dataRes = await LoginUser(userLogin)
         if (!dataRes.isError) {
             updateUser(dataRes.data)
+            timerSuccessAlert("Bienvenido a JacShop!")
             navigate('/');
         } else {
-            alert('Usuario o contraseña incorrecta')
+            errorAlerta('Usuario o contraseña incorrecta')
         }
     }
 

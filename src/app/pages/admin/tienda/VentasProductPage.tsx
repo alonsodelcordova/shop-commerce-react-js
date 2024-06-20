@@ -6,6 +6,7 @@ import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../../components/Loader";
 import ModalFormVenta from "../../../components/forms/ModalFormVenta";
 import { FaEye, FaPlus } from "react-icons/fa";
+import { errorAlerta } from "../../../utils/alerts";
 
 
 
@@ -37,7 +38,7 @@ export default function VentasProductPage() {
             setVentaSelect(venta);
             setShowDetalles(true)
         } else {
-            alert('No cuanta con detalles de venta')
+            errorAlerta('No cuenta con detalles de venta')
         }
     }
 
@@ -52,7 +53,7 @@ export default function VentasProductPage() {
         if (data.status == 200) {
             setVentas(data.data);
         } else {
-            alert('Error al cargar las ventas');
+            errorAlerta('Error al cargar las ventas');
         }
         setLoading(false);
     }
