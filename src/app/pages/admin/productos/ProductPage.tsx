@@ -5,6 +5,8 @@ import CardProducto from "../../../components/cards/CardProduct";
 import ModalFormProduct from "../../../components/forms/ModalFormProduct";
 import LoaderComponent from "../../../components/Loader";
 import { FaPlus } from "react-icons/fa";
+import { getArrayPages } from "../../../utils/formats";
+import Pagination from "../../../components/Pagination";
 
 
 const limit = 6
@@ -30,13 +32,9 @@ export default function ProductPage() {
         setLoading(true);
         const productsNew = await getProductsPaginate(skin, limit);
         let lista = productsNew.data
+        let arr_pages = getArrayPages(lista.total, limit)
+        
         setProducts(lista.data);
-        let arr_pages = []
-        let num_pages = Math.ceil(lista.total / limit)
-        for (let i = 0; i < num_pages; i++) {
-            arr_pages.push(i);
-        }
-        arr_pages = arr_pages.length >0 ? arr_pages : [0] 
         setPages(arr_pages)
         setLoading(false);
     }
@@ -78,25 +76,7 @@ export default function ProductPage() {
                 })}
             </div>
             <br />
-            <nav className="d-flex justify-content-center">
-                <ul className="pagination">
-                    <li className="page-item">
-                        <button className="page-link" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </button>
-                    </li>
-                    {pages.map( el =>
-                        <li key={el} className="page-item"><button className="page-link" 
-                            onClick={()=>changePage(el)}
-                        >{el + 1 }</button></li>
-                    )}
-                    <li className="page-item">
-                        <button className="page-link" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+            <Pagination pages={pages} changePage={changePage} />
 
             <ModalFormProduct show={show} handleClose={handleClose} />
         </div>

@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { getIngresos } from "../../../services/ingresos.service";
 import { DetalleIngreso, Ingreso } from "../../../types/Ingreso";
-import { formatFecha } from "../../../utils/formats";
+import { formatFecha, getArrayPages } from "../../../utils/formats";
 import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../../components/Loader";
 import ModalFormIngresoProducto from "../../../components/forms/ModalFormIngresoProducto";
 import { FaEye, FaPlus } from "react-icons/fa";
 import { errorAlerta } from "../../../utils/alerts";
+import Pagination from "../../../components/Pagination";
 
-
+const limit = 10;
 export default function IngresoProductoPage() {
 
     const [ingresos, setIngresos] = useState<Ingreso[]>([]);
     const [showDetalles, setShowDetalles] = useState(false);
     const [detalles, setDetalles] = useState<DetalleIngreso[]>([]);
     const [loading, setLoading] = useState(false);
-
+    const [skin, setSkin] = useState(0)
+    const [pages, setPages] = useState<number []>([])
     const [showForm, setShowForm] = useState(false);
 
     const handleShowForm = () => {
@@ -40,13 +42,24 @@ export default function IngresoProductoPage() {
 
     const allIngresos = async () => {
         setLoading(true);
-        const data = await getIngresos();
+        const data = await getIngresos(skin, limit);
         if (data.status == 200) {
-            setIngresos(data.data);
+            let listaData = data.data
+            let arr_pages = getArrayPages(listaData.total, limit)
+            setPages(arr_pages)
+            setIngresos(listaData.data);
         } else {
             errorAlerta('Error al cargar los ingresos');
         }
         setLoading(false);
+    }
+
+    const changePage= async(index:number) => {
+        let newSkin = index * limit
+        setSkin(newSkin)
+        const data = await getIngresos(newSkin, limit);
+        let listaData = data.data
+        setIngresos(listaData.data);
     }
 
 
@@ -101,7 +114,7 @@ export default function IngresoProductoPage() {
                     </tbody>
                 </table>
             </div>
-
+            <Pagination pages={pages} changePage={changePage} />
 
             <ModalFormIngresoProducto show={showForm} handleClose={handleHideForm} />
 

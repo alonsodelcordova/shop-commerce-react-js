@@ -1,8 +1,8 @@
 import { Ingreso } from "../types/Ingreso";
-import { ApiResponse, getData, postData } from "../utils/main.service";
+import { ApiResponse, ListDataResponse, getData, postData } from "../utils/main.service";
 
 
-export async  function  getIngresos(skip=0, limit=100): Promise<ApiResponse<Ingreso[]>>{
+export async  function  getIngresos(skip=0, limit=100): Promise<ApiResponse<ListDataResponse<Ingreso>>>{
     return  await getData('ingresos', {skip, limit});
 }
 
