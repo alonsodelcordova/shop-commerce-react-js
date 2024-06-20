@@ -6,6 +6,7 @@ import { getUrl } from "../../utils/main.service";
 import { FaSquarePollVertical } from "react-icons/fa6";
 import { GrUpdate } from "react-icons/gr";
 import { errorAlerta, timerSuccessAlert } from "../../utils/alerts";
+import ModalViewPdf from "../utils/ModalviewPdf";
 
 interface CardProductoProps {
     producto: Producto;
@@ -79,15 +80,7 @@ export default function CardProducto({ producto, onUpdate }: CardProductoProps) 
                 </button>
             </div>
 
-
-            <Modal show={show} onHide={handleClose} size="lg">
-                <Modal.Header closeButton>
-                    <Modal.Title>STOCKS</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <iframe src={pdf.toString()} width="100%" height="500px"></iframe>
-                </Modal.Body>
-            </Modal>
+            <ModalViewPdf show={show} handleClose={handleClose} pdf={pdf} />
 
             <Modal show={showImage} onHide={handleCloseImage} size="lg">
                 <Modal.Header closeButton>

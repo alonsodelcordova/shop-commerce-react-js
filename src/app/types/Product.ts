@@ -7,6 +7,9 @@ export interface Producto{
     subcategoria_id?: number;
     usuario_id?: number;
     stock_actual?: number;
+    stock_minimo?: number;
+    categoria_nombre?: string;
+    subcategoria_nombre?: string;
 }
 
 export interface Categoria{

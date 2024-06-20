@@ -7,6 +7,10 @@ export async  function  getProducts(): Promise<ApiResponse<Producto[]>>{
     return  await getData('productos/by_list');
 }
 
+export async function getProductos_by_stock(): Promise<ApiResponse<Producto[]>>
+{
+    return await getData('productos/by_stock');
+}
 
 export async  function  getProductsPaginate(skip:number = 0, limit:number=10): Promise<ApiResponse<ListDataResponse<Producto>>>{
     return  await getData('productos',{skip, limit});	
