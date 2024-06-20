@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getVentas } from "../../services/ventas.service";
-import { Venta } from "../../types/Ventas";
-import { formatFecha } from "../../utils/formats";
+import { getVentas } from "../../../services/ventas.service";
+import { Venta } from "../../../types/Ventas";
+import { formatFecha } from "../../../utils/formats";
 import { Modal } from "react-bootstrap";
-import LoaderComponent from "../../components/Loader";
-import ModalFormVenta from "../../components/forms/ModalFormVenta";
+import LoaderComponent from "../../../components/Loader";
+import ModalFormVenta from "../../../components/forms/ModalFormVenta";
 import { FaEye, FaPlus } from "react-icons/fa";
 
 
@@ -62,7 +62,7 @@ export default function VentasProductPage() {
     }, []);
 
     return (
-        <div className="container my-4">
+        <div className="container-md my-4 container-fluid">
             <div className="d-flex justify-content-between">
                 <h2>Ventas</h2>
                 <div>
@@ -73,35 +73,37 @@ export default function VentasProductPage() {
             </div>
 
             {loading && <LoaderComponent />}
-
-            <table className="table my-2 table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Fecha</th>
-                        <th>Cliente</th>
-                        <th>Detalles</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ventas.map((venta, index) => (
-                        <tr key={index}>
-                            <td>{venta.id}</td>
-                            <td>{formatFecha(venta?.fecha_registro || '')}</td>
-                            <td>{venta.razon_social}</td>
-                            <td>{venta.tipo_comprobante}: # {venta.detalles.length}</td>
-                            <td>S/. {venta.total}</td>
-                            <td>
-                                <button className="btn btn-info btn-sm"
-                                    onClick={() => handleShowDetalles(venta?.id || 0)}
-                                > <FaEye /> Ver</button>
-                            </td>
+            <div className="table-responsive">
+                <table className="table my-2 table-bordered" style={{minWidth: '650px'}}>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Detalles</th>
+                            <th className="text-end">Total</th>
+                            <th></th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {ventas.map((venta, index) => (
+                            <tr key={index}>
+                                <td>{venta.id}</td>
+                                <td>{formatFecha(venta?.fecha_registro || '')}</td>
+                                <td>{venta.razon_social}</td>
+                                <td>{venta.tipo_comprobante}: # {venta.detalles.length}</td>
+                                <td className="text-end">S/. {venta.total}</td>
+                                <td style={{width: '80px'}}>
+                                    <button className="btn btn-info btn-sm"
+                                        onClick={() => handleShowDetalles(venta?.id || 0)}
+                                    > <FaEye /> Ver</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
 
             <ModalFormVenta show={showModalVenta} handleClose={handleHideModalVenta} />
 

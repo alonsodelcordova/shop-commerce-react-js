@@ -155,7 +155,7 @@ export default function ModalFormIngresoProducto({ show, handleClose }: ModalFor
                                     onChange={(e) => setDetalleForm({ ...detalleForm, producto_id: parseInt(e.target.value) })} >
                                     <option value="0" hidden>Seleccion un producto</option>
                                     {productos.map(prod =>
-                                        <option key={prod.id} value={prod.id} > {prod.id} - {prod.nombre}</option>
+                                        <option key={prod.id} value={prod.id} > #{prod.id} - {prod.nombre}</option>
                                     )}
                                 </select>
                             </div>

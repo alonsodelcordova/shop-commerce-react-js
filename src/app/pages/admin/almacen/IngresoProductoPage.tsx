@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { getIngresos } from "../../services/ingresos.service";
-import { DetalleIngreso, Ingreso } from "../../types/Ingreso";
-import { formatFecha } from "../../utils/formats";
+import { getIngresos } from "../../../services/ingresos.service";
+import { DetalleIngreso, Ingreso } from "../../../types/Ingreso";
+import { formatFecha } from "../../../utils/formats";
 import { Modal } from "react-bootstrap";
-import LoaderComponent from "../../components/Loader";
-import ModalFormIngresoProducto from "../../components/forms/ModalFormIngresoProducto";
+import LoaderComponent from "../../../components/Loader";
+import ModalFormIngresoProducto from "../../../components/forms/ModalFormIngresoProducto";
 import { FaEye, FaPlus } from "react-icons/fa";
 
 
-export default function IngresoProductoPage () {
+export default function IngresoProductoPage() {
 
     const [ingresos, setIngresos] = useState<Ingreso[]>([]);
     const [showDetalles, setShowDetalles] = useState(false);
@@ -21,28 +21,28 @@ export default function IngresoProductoPage () {
         setShowForm(true);
     }
 
-    const handleHideForm = (e:boolean) => {
+    const handleHideForm = (e: boolean) => {
         setShowForm(false);
         if (e) {
             allIngresos();
         }
     }
 
-    const handleShowDetalles = (id:number) => {
+    const handleShowDetalles = (id: number) => {
         let ingreso = ingresos.find(ingreso => ingreso.id == id);
-        setDetalles(ingreso?.detalles||[]);
+        setDetalles(ingreso?.detalles || []);
         setShowDetalles(true);
     }
     const handleHideDetalles = () => {
         setShowDetalles(false);
     }
 
-    const allIngresos = async () =>{
+    const allIngresos = async () => {
         setLoading(true);
         const data = await getIngresos();
         if (data.status == 200) {
             setIngresos(data.data);
-        }else{
+        } else {
             alert('Error al cargar los ingresos');
         }
         setLoading(false);
@@ -54,8 +54,8 @@ export default function IngresoProductoPage () {
     }, []);
 
     return (
-        <div className="container my-3">
-            
+        <div className="container-md my-3 container-fluid">
+
             <div className="d-flex justify-content-between">
                 <h1>INGRESOS</h1>
                 <div>
@@ -65,43 +65,45 @@ export default function IngresoProductoPage () {
                 </div>
             </div>
 
-            {loading && <LoaderComponent/>}
+            {loading && <LoaderComponent />}
+            <div className="table-responsive">
+                <table className="table table-bordered my-2 table-hover" style={{minWidth:'650px'}}>
+                    <thead>
+                        <tr>
+                            <th># GUIA</th>
+                            <th>Fecha</th>
+                            <th>Vehiculo</th>
+                            <th>Detalles</th>
+                            <th className="text-end">Costo Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {ingresos.map((ingreso) => {
+                            return (
+                                <tr key={ingreso.id}>
+                                    <td>{ingreso.id} - {ingreso.nro_guia}</td>
+                                    <td>{formatFecha(ingreso?.fecha_registro || '')}</td>
+                                    <td>{ingreso.vehiculo}</td>
+                                    <td>
+                                        # {ingreso.detalles.length}
+                                    </td>
+                                    <td className="text-end">S/. {ingreso.total}</td>
+                                    <td>
+                                        <button className="btn btn-info btn-sm"
+                                            onClick={() => handleShowDetalles(ingreso?.id || 0)}
+                                        > <FaEye /> Ver</button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
 
-            <table className="table table-bordered my-2 table-hover">
-                <thead>
-                    <tr>
-                        <th># GUIA</th>
-                        <th>Fecha</th>
-                        <th>Vehiculo</th>
-                        <th>Detalles</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ingresos.map((ingreso) => {
-                        return (
-                            <tr key={ingreso.id}>
-                                <td>{ingreso.id} - {ingreso.nro_guia}</td>
-                                <td>{formatFecha(ingreso?.fecha_registro||'')}</td>
-                                <td>{ingreso.vehiculo}</td>
-                                <td>
-                                    # {ingreso.detalles.length} 
-                                </td>
-                                <td>S/. {ingreso.total}</td>
-                                <td>
-                                    <button className="btn btn-info btn-sm"
-                                        onClick={() => handleShowDetalles(ingreso?.id||0)}
-                                    > <FaEye /> Ver</button>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
 
             <ModalFormIngresoProducto show={showForm} handleClose={handleHideForm} />
-            
+
             <Modal show={showDetalles} onHide={handleHideDetalles}>
                 <Modal.Header>
                     <Modal.Title>Detalles del Ingreso</Modal.Title>
@@ -131,7 +133,7 @@ export default function IngresoProductoPage () {
                         <tfoot>
                             <tr>
                                 <td colSpan={3}>Total</td>
-                                <td>S/. {detalles.reduce((acc, detalle) => acc + detalle.total, 0) }</td>
+                                <td>S/. {detalles.reduce((acc, detalle) => acc + detalle.total, 0)}</td>
                             </tr>
                         </tfoot>
                     </table>

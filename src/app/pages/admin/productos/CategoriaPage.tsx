@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { getCategorias } from "../../services/product.service"
-import { Categoria } from "../../types/Product";
-import CardCategory from "../../components/cards/CardCategory";
-import ModalFormCategory from "../../components/forms/ModalFormCategory";
-import LoaderComponent from "../../components/Loader";
+import { getCategorias } from "../../../services/product.service"
+import { Categoria } from "../../../types/Product";
+import CardCategory from "../../../components/cards/CardCategory";
+import ModalFormCategory from "../../../components/forms/ModalFormCategory";
+import LoaderComponent from "../../../components/Loader";
 import { FaPlus } from "react-icons/fa";
 
 export default function CategoriaPage() {
@@ -35,7 +35,7 @@ export default function CategoriaPage() {
     }, []);
 
     return (
-        <div className="container my-4">
+        <div className="container-md my-4 container-fluid">
             <div className="d-flex justify-content-between">
                 <h1>CATEGORIAS</h1>
                 <div>

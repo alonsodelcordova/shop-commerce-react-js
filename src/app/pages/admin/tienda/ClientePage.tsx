@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { Cliente } from "../../types/Cliente"
-import { getClientes } from "../../services/clientes.service"
-import ModalFormCliente from "../../components/forms/ModalFormCliente"
+import { Cliente } from "../../../types/Cliente"
+import { getClientes } from "../../../services/clientes.service"
+import ModalFormCliente from "../../../components/forms/ModalFormCliente"
 import { FaPencil } from "react-icons/fa6"
 import { FaPlus } from "react-icons/fa"
 
@@ -33,7 +33,7 @@ export default function ClientePage() {
     }, [])
 
     return (
-        <div className="container my-3">
+        <div className="container-md my-3 container-fluid">
             <div className="d-flex justify-content-between">
                 <h1>Clientes</h1>
                 <div>
@@ -43,7 +43,7 @@ export default function ClientePage() {
                 </div>
             </div>
             <div className="table-responsive">
-                <table className="my-2 table table-bordered ">
+                <table className="my-2 table table-bordered " style={{minWidth: '650px'}}>
                     <thead>
                         <tr>
                             <th>Documento</th>
@@ -57,11 +57,11 @@ export default function ClientePage() {
                         {
                             clientes.map((cliente, index) => (
                                 <tr key={index}>
-                                    <td>{cliente.tipo_documento}: {cliente.numero_documento}</td>
+                                    <td style={{minWidth: '130px'}}>{cliente.tipo_documento}: {cliente.numero_documento}</td>
                                     <td>{cliente.nombres} {cliente.apellidos}</td>
                                     <td>{cliente.email}</td>
                                     <td>{cliente.celular}</td>
-                                    <td style={{ width: '200px' }}>
+                                    <td style={{ width: '120px' }}>
                                         <button className="btn btn-warning m-1">
                                             <FaPencil /> Editar
                                         </button>

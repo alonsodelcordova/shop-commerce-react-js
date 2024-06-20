@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { getProductsPaginate } from "../../services/product.service"
-import { Producto } from "../../types/Product";
-import CardProducto from "../../components/cards/CardProduct";
-import ModalFormProduct from "../../components/forms/ModalFormProduct";
-import LoaderComponent from "../../components/Loader";
+import { getProductsPaginate } from "../../../services/product.service"
+import { Producto } from "../../../types/Product";
+import CardProducto from "../../../components/cards/CardProduct";
+import ModalFormProduct from "../../../components/forms/ModalFormProduct";
+import LoaderComponent from "../../../components/Loader";
 import { FaPlus } from "react-icons/fa";
 
 
@@ -55,7 +55,7 @@ export default function ProductPage() {
 
 
     return (
-        <div className="container my-3">
+        <div className="container-md my-3 container-fluid">
 
             <div className="d-flex justify-content-between  my-2">
                 <h1>PRODUCTOS</h1>
