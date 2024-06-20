@@ -163,13 +163,20 @@ export default function ModalFormIngresoProducto({ show, handleClose }: ModalFor
                             <div className="form-group my-1">
                                 <label htmlFor="cantidad">Cantidad</label>
                                 <input type="number" name="cantidad" id="cantidad" className="form-control"
-                                    value={detalleForm.cantidad.toString()} onChange={(e) => setDetalleForm({ ...detalleForm, cantidad: parseInt(e.target.value) })} />
+                                    value={detalleForm.cantidad.toString()} 
+                                    onChange={(e) => setDetalleForm({ ...detalleForm, cantidad: parseInt(e.target.value) })} />
+                                
                             </div>
 
                             <div className="form-group my-1">
                                 <label htmlFor="precio_unitario">Precio Unitario</label>
-                                <input type="number" name="cantidad" id="cantidad" className="form-control"
-                                    value={detalleForm.precio_unitario.toString()} onChange={(e) => setDetalleForm({ ...detalleForm, precio_unitario: parseInt(e.target.value) })} />
+                                <div className="input-group">
+                                    <span className="input-group-text">S/.</span>
+                                    <input type="number" name="precio_unitario" id="precio_unitario" className="form-control"
+                                        value={detalleForm.precio_unitario.toString()} 
+                                        onChange={(e) => setDetalleForm({ ...detalleForm, precio_unitario: parseInt(e.target.value) })} />
+                                </div>
+                                
                             </div>
                             <button type="button" className="btn btn-success mt-2"
                                 onClick={onSaveDetalle}

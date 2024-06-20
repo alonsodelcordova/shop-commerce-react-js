@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SubCategoria } from "../../types/Product";
 import { Modal } from "react-bootstrap";
 import { saveCategoryPost } from "../../services/product.service";
+import { FaPlus } from "react-icons/fa";
 
 interface ModalFormCategoryProps {
     show: boolean;
@@ -97,7 +98,7 @@ export default function ModalFormCategory(props: ModalFormCategoryProps) {
                                 value={categoriaForm.descripcion}
                                 onChange={(e) => setCategoriaForm({...categoriaForm, descripcion: e.target.value})} />
                         </div>
-                        <hr />
+                        <div className="card card-body">
                         <div className="row">
                             <h5>Subcategorias</h5>
                             <div className="col-md-6 my-2 col-lg-4">
@@ -115,7 +116,9 @@ export default function ModalFormCategory(props: ModalFormCategoryProps) {
                                         onChange={(e) => setSubCategoriaForm({...subCategoriaForm, descripcion: e.target.value})} />
                                 </div>
                                 <div className="form-group mt-2">
-                                    <button type="button" className="btn btn-primary" onClick={agregarSubcategoria}>Agregar</button>
+                                    <button type="button" className="btn btn-primary" onClick={agregarSubcategoria}>
+                                        <FaPlus />  Agregar
+                                    </button>
                                 </div>
                             </div>
 
@@ -148,6 +151,8 @@ export default function ModalFormCategory(props: ModalFormCategoryProps) {
                             </div>
 
                         </div>
+                        </div>
+                      
 
                     </form>
                 </Modal.Body>

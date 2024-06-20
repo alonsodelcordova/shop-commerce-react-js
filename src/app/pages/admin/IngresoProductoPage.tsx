@@ -5,6 +5,7 @@ import { formatFecha } from "../../utils/formats";
 import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../components/Loader";
 import ModalFormIngresoProducto from "../../components/forms/ModalFormIngresoProducto";
+import { FaEye, FaPlus } from "react-icons/fa";
 
 
 export default function IngresoProductoPage () {
@@ -60,7 +61,7 @@ export default function IngresoProductoPage () {
                 <div>
                     <button className="btn btn-success"
                         onClick={handleShowForm}
-                    >Agregar</button>
+                    > <FaPlus /> Agregar</button>
                 </div>
             </div>
 
@@ -91,7 +92,7 @@ export default function IngresoProductoPage () {
                                 <td>
                                     <button className="btn btn-info btn-sm"
                                         onClick={() => handleShowDetalles(ingreso?.id||0)}
-                                    >Ver</button>
+                                    > <FaEye /> Ver</button>
                                 </td>
                             </tr>
                         );

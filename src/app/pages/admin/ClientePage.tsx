@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Cliente } from "../../types/Cliente"
 import { getClientes } from "../../services/clientes.service"
 import ModalFormCliente from "../../components/forms/ModalFormCliente"
+import { FaPencil } from "react-icons/fa6"
+import { FaPlus } from "react-icons/fa"
 
 
 
@@ -37,7 +39,7 @@ export default function ClientePage() {
                 <div>
                     <button className="btn btn-success"
                         onClick={handleShowModal}
-                    >Agregar</button>
+                    > <FaPlus /> Agregar</button>
                 </div>
             </div>
             <div className="table-responsive">
@@ -60,8 +62,9 @@ export default function ClientePage() {
                                     <td>{cliente.email}</td>
                                     <td>{cliente.celular}</td>
                                     <td style={{ width: '200px' }}>
-                                        <button className="btn btn-warning m-1">Editar</button>
-                                        <button className="btn btn-danger m-1">Eliminar</button>
+                                        <button className="btn btn-warning m-1">
+                                            <FaPencil /> Editar
+                                        </button>
                                     </td>
                                 </tr>
                             ))

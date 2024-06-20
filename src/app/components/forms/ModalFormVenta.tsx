@@ -188,8 +188,12 @@ export default function ModalFormVenta({ show, handleClose }: ModalFormVentaProp
                             </div>
                             <div className="form-group my-2">
                                 <label >Precio</label>
-                                <input type="number" className="form-control" value={detalleForm.precio}
-                                    onChange={(e) => setDetalleForm({ ...detalleForm, precio: parseInt(e.target.value || '0') })} />
+                                <div className="input-group">
+                                    <span className="input-group-text">S/.</span>
+                                    <input type="number" className="form-control" value={detalleForm.precio}
+                                        onChange={(e) => setDetalleForm({ ...detalleForm, precio: parseInt(e.target.value || '0') })} />
+                                </div>
+                               
                                 <span className="small">Precio Venta Asignado : {detalleForm.precio_producto}</span>
 
                             </div>

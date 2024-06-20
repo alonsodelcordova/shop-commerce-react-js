@@ -3,7 +3,7 @@ import { ApiResponse, ListDataResponse, getData, getUrl, postData, putDataFormDa
 
 
 
-export async  function  getProducts(): Promise<ApiResponse<Producto>>{
+export async  function  getProducts(): Promise<ApiResponse<Producto[]>>{
     return  await getData('productos/by_list');
 }
 

@@ -5,6 +5,7 @@ import { formatFecha } from "../../utils/formats";
 import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../components/Loader";
 import ModalFormVenta from "../../components/forms/ModalFormVenta";
+import { FaEye, FaPlus } from "react-icons/fa";
 
 
 
@@ -67,7 +68,7 @@ export default function VentasProductPage() {
                 <div>
                     <button className="btn btn-primary btn-sm"
                         onClick={handleShowModalVenta}
-                    >Nueva venta</button>
+                    > <FaPlus /> Nueva venta</button>
                 </div>
             </div>
 
@@ -95,7 +96,7 @@ export default function VentasProductPage() {
                             <td>
                                 <button className="btn btn-info btn-sm"
                                     onClick={() => handleShowDetalles(venta?.id || 0)}
-                                >Ver</button>
+                                > <FaEye /> Ver</button>
                             </td>
                         </tr>
                     ))}

@@ -4,9 +4,10 @@ import { Producto } from "../../types/Product";
 import CardProducto from "../../components/cards/CardProduct";
 import ModalFormProduct from "../../components/forms/ModalFormProduct";
 import LoaderComponent from "../../components/Loader";
+import { FaPlus } from "react-icons/fa";
 
 
-const limit = 3
+const limit = 6
 
 export default function ProductPage() {
 
@@ -31,10 +32,11 @@ export default function ProductPage() {
         let lista = productsNew.data
         setProducts(lista.data);
         let arr_pages = []
-        let num_pages = (lista.total / limit).toPrecision(1)
-        for (let i = 0; i < parseInt(num_pages); i++) {
+        let num_pages = Math.ceil(lista.total / limit)
+        for (let i = 0; i < num_pages; i++) {
             arr_pages.push(i);
         }
+        arr_pages = arr_pages.length >0 ? arr_pages : [0] 
         setPages(arr_pages)
         setLoading(false);
     }
@@ -58,7 +60,9 @@ export default function ProductPage() {
             <div className="d-flex justify-content-between  my-2">
                 <h1>PRODUCTOS</h1>
                 <div>
-                    <button className="btn btn-success" onClick={handleShow}>Agregar</button>
+                    <button className="btn btn-success" onClick={handleShow}>
+                        <FaPlus /> Agregar
+                    </button>
                 </div>
             </div>
 

@@ -3,6 +3,8 @@ import { getReporteStocks, saveImagenProducto } from "../../services/product.ser
 import { Producto } from "../../types/Product";
 import { Modal } from "react-bootstrap";
 import { getUrl } from "../../utils/main.service";
+import { FaSquarePollVertical } from "react-icons/fa6";
+import { GrUpdate } from "react-icons/gr";
 
 interface CardProductoProps {
     producto: Producto;
@@ -34,8 +36,8 @@ export default function CardProducto({ producto, onUpdate }: CardProductoProps) 
         if (data.status === 200) {
             handleCloseImage();
             onUpdate();
-        }else{
-            alert(data.message);   
+        } else {
+            alert(data.message);
         }
     }
 
@@ -48,23 +50,30 @@ export default function CardProducto({ producto, onUpdate }: CardProductoProps) 
                 </div>
             </div>
             <div className="card-body">
+
                 <div className="text-center">
                     {producto?.imagen && <img src={getUrl(producto?.imagen || '')} alt="" width="100" height="100" className="text-center" />}
-                    <br />
-                    <button className="btn btn-warning btn-sm mt-2" onClick={handleShowImage} >Actualizar Imagen</button>
                 </div>
+                <div className="mt-2 d-flex justify-content-between">
+                    <span className="badge bg-dark">
+                        Stock: {producto.stock_actual}
+                    </span>
+                    <span className="badge bg-secondary">
+                        Precio: S/. {producto.precio_venta}
+                    </span>
+                </div>
+               
 
-                <p className="post-body">{producto.descripcion}</p>
-                <span>
-                    Precio: S/. {producto.precio_venta}
-                </span>
             </div>
             <div className="card-footer d-flex justify-content-between">
                 {/*<button className="btn btn-danger">
                         Eliminar
                     </button>*/}
                 <button className="btn btn-info" onClick={verStocks}>
-                    Stocks
+                    <FaSquarePollVertical /> Stocks
+                </button>
+                <button className="btn btn-warning " onClick={handleShowImage} >
+                    <GrUpdate /> Imagen
                 </button>
             </div>
 

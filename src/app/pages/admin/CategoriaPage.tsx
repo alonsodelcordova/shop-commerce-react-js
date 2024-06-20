@@ -4,6 +4,7 @@ import { Categoria } from "../../types/Product";
 import CardCategory from "../../components/cards/CardCategory";
 import ModalFormCategory from "../../components/forms/ModalFormCategory";
 import LoaderComponent from "../../components/Loader";
+import { FaPlus } from "react-icons/fa";
 
 export default function CategoriaPage() {
 
@@ -40,7 +41,7 @@ export default function CategoriaPage() {
                 <div>
                     <button className="btn btn-success" 
                         onClick={agregar}
-                    >Agregar</button>
+                    > <FaPlus /> Agregar</button>
                 </div>
             </div>
 
