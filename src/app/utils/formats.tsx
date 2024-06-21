@@ -1,13 +1,15 @@
 import moment from 'moment';
 
 
-export  const formatFecha = (fecha: string) => {
+export  const formatFecha = (fecha: string) : string => {
     let date = new Date(fecha);
     return moment(date).format("DD/MM/YYYY hh:mm A")
 }
 
 
-
+export const strFormatDateBackend = (fecha:Date):string => {
+    return moment(fecha).format("YYYY-MM-DD")
+}
 
 
 

@@ -14,7 +14,7 @@ export default function ModalViewPdf({ show, handleClose, pdf }: ModalViewPdfPro
                 <Modal.Title>STOCKS</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <iframe src={pdf.toString()} width="100%" height="500px"></iframe>
+                <iframe src={pdf.toString()} width="100%" height="500px" />
             </Modal.Body>
         </Modal>
 
