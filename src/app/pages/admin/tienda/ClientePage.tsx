@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react"
 import { Cliente } from "../../../types/Cliente"
-import { getClientes } from "../../../services/clientes.service"
+import { getClientes_paginate } from "../../../services/clientes.service"
 import ModalFormCliente from "../../../components/forms/ModalFormCliente"
 import { FaPencil } from "react-icons/fa6"
 import { FaPlus } from "react-icons/fa"
+import { getArrayPages } from "../../../utils/formats"
+import LoaderComponent from "../../../components/Loader"
+import Pagination from "../../../components/Pagination"
 
-
+const limit = 10
 
 export default function ClientePage() {
-
+    const [loading, setLoading] = useState(false);
     const [clientes, setClientes] = useState<Cliente[]>([])
     const [showModal, setShowModal] = useState(false)
-
+    const [skin, setSkin] = useState(0)
+    const [pages, setPages] = useState<number []>([])
     const handleShowModal = () => setShowModal(true)
     
     const handleHideModal = (e:boolean) =>{
@@ -22,10 +26,21 @@ export default function ClientePage() {
     }
 
     const getAllClientes = async () => {
-        const data = await getClientes()
-        if (data.status == 200) {
-            setClientes(data.data)
-        }
+        setLoading(true);
+        const data = await getClientes_paginate(skin, limit)
+        let lista = data.data
+        let arr_pages = getArrayPages(lista.total, limit)
+        setClientes(lista.data)
+        setPages(arr_pages)
+        setLoading(false)
+    }
+
+    const changePage = async (index: number) => {
+        let newSkin = index * limit
+        setSkin(newSkin)
+        const data = await getClientes_paginate(newSkin, limit)
+        let lista = data.data
+        setClientes(lista.data)
     }
 
     useEffect(() => {
@@ -42,6 +57,9 @@ export default function ClientePage() {
                     > <FaPlus /> Agregar</button>
                 </div>
             </div>
+
+            {loading && <LoaderComponent />}
+
             <div className="table-responsive">
                 <table className="my-2 table table-bordered " style={{minWidth: '650px'}}>
                     <thead>
@@ -72,7 +90,8 @@ export default function ClientePage() {
                     </tbody>
                 </table>
             </div>
-
+            <br />
+            <Pagination pages={pages} changePage={changePage} />
             <ModalFormCliente  show={showModal} handleClose={handleHideModal} />
         </div>
     )
