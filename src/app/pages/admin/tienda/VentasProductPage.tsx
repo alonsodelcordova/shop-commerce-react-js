@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
-import { getVentas } from "../../../services/ventas.service";
+import { getVentasPaginate } from "../../../services/ventas.service";
 import { Venta } from "../../../types/Ventas";
-import { formatFecha } from "../../../utils/formats";
+import { formatFecha, getArrayPages } from "../../../utils/formats";
 import { Modal } from "react-bootstrap";
 import LoaderComponent from "../../../components/Loader";
 import ModalFormVenta from "../../../components/forms/ModalFormVenta";
 import { FaEye, FaPlus } from "react-icons/fa";
 import { errorAlerta } from "../../../utils/alerts";
+import Pagination from "../../../components/Pagination";
 
 
-
+const limit = 10
 
 export default function VentasProductPage() {
 
     const [ventas, setVentas] = useState<Venta[]>([]);
-
     const [showDetalles, setShowDetalles] = useState(false)
     const [ventaSelect, setVentaSelect] = useState<Venta | null>(null)
     const [loading, setLoading] = useState(false);
-
+    const [skin, setSkin] = useState(0)
+    const [pages, setPages] = useState<number []>([])
     const [showModalVenta, setShowModalVenta] = useState(false);
 
     const handleShowModalVenta = () => {
@@ -49,14 +50,22 @@ export default function VentasProductPage() {
 
     const allVentas = async () => {
         setLoading(true);
-        const data = await getVentas();
-        if (data.status == 200) {
-            setVentas(data.data);
-        } else {
-            errorAlerta('Error al cargar las ventas');
-        }
+        const dataNew = await getVentasPaginate(skin, limit);
+        let listaData = dataNew.data
+        let arr_data = getArrayPages(listaData.total, limit)
+        setVentas(listaData.data)
+        setPages(arr_data)
         setLoading(false);
     }
+
+    const changePage= async(index:number) => {
+        let newSkin = index * limit
+        setSkin(newSkin)
+        const productsNew = await getVentasPaginate(newSkin, limit);
+        let lista = productsNew.data
+        setVentas(lista.data);
+    }
+
 
     useEffect(() => {
         allVentas();
@@ -104,7 +113,8 @@ export default function VentasProductPage() {
                     </tbody>
                 </table>
             </div>
-
+            
+            <Pagination pages={pages} changePage={changePage} />
 
             <ModalFormVenta show={showModalVenta} handleClose={handleHideModalVenta} />
 

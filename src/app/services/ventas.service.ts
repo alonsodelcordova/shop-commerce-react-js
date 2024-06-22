@@ -1,12 +1,14 @@
 import { Venta } from "../types/Ventas";
-import { ApiResponse, getData, getUrl, postData } from "../utils/main.service";
+import { ApiResponse, ListDataResponse, getData, getUrl, postData } from "../utils/main.service";
 
 
 
-export async  function  getVentas(skip=0, limit=100): Promise<ApiResponse<Venta[]>>{
+export async  function  getVentas(): Promise<ApiResponse<Venta[]>>{
+    return  await getData('ventas/by_list');
+}
+export async  function  getVentasPaginate(skip=0, limit=10): Promise<ApiResponse<ListDataResponse<Venta>>>{
     return  await getData('ventas', {skip, limit});
 }
-
 
 export async function saveVenta(venta: Venta): Promise<ApiResponse<Venta>>{
     return await postData('ventas', venta);
