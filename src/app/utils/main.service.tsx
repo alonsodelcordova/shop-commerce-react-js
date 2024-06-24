@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { API_URL } from '../../const';
+import { getUserLocale } from './StorageUser';
 
 
 // types.ts
@@ -57,6 +58,9 @@ export const getUrl = (endpoint: string): string => {
 
 export const getData = async (endpoint: string, params:any = null): Promise<ApiResponse<any> > => {
     try {
+        let user = getUserLocale();
+        apiClient.defaults.headers.common['X-Token'] = 'Token '+ user.token?.token||'';
+
         if (params != null) {
             const response = await apiClient.get(
                 endpoint,

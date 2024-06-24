@@ -58,7 +58,7 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="card bg-success text-white  p-4">
+        <div className="card bg-success text-white  p-4" style={{maxWidth: '600px'}}>
             <div className="card-body  min-vw-50">
                 <div className="text-center">
                     <img src={photo} alt="icon" width="300" height="300" className="d-block mx-auto mb-2" />
