@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { API_URL } from '../../const';
 import { getUserLocale } from './StorageUser';
 
+let user = getUserLocale();
 
-// types.ts
 
 export interface ApiResponse<T> {
     data: T;
@@ -23,6 +23,7 @@ const apiClient: AxiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
+        'X-Token': 'Token '+ user.token?.token||''
     }
 });
 
@@ -30,6 +31,7 @@ const apiClientFormData: AxiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'multipart/form-data',
+        'X-Token': 'Token '+ user.token?.token||''
     }
 });
 
@@ -58,8 +60,7 @@ export const getUrl = (endpoint: string): string => {
 
 export const getData = async (endpoint: string, params:any = null): Promise<ApiResponse<any> > => {
     try {
-        let user = getUserLocale();
-        apiClient.defaults.headers.common['X-Token'] = 'Token '+ user.token?.token||'';
+        
 
         if (params != null) {
             const response = await apiClient.get(
