@@ -1,6 +1,6 @@
 import {  User, UserLogin, UserRegister } from "../types/User";
 import { setUserLocale } from "../utils/StorageUser";
-import { postData } from "../utils/main.service";
+import { ApiResponse, getData, postData } from "../utils/main.service";
 
 
 
@@ -19,3 +19,8 @@ export async function LoginUser(user: UserLogin) {
     return result;
 }
 
+
+export async function getUser(): Promise<ApiResponse<User>> {
+    const result = await getData('users/my-perfil');
+    return result;
+}

@@ -145,8 +145,9 @@ export default function ModalFormVenta({ show, handleClose }: ModalFormVentaProp
                             <select className="form-select" value={ventaForm.tipo_comprobante}
                                 onChange={(e) => setVentaForm({ ...ventaForm, tipo_comprobante: e.target.value })} >
                                 <option value="" hidden>Seleccione un producto</option>
-                                <option value="boleta">Boleta</option>
-                                <option value="factura">Factura</option>
+                                <option value="BOLETA">Boleta</option>
+                                <option value="FACTURA">Factura</option>
+                                <option value="TICKET">Ticket</option>
                             </select>
                         </div>
                         <div className="form-group my-2 col-lg-8 col-md-6">

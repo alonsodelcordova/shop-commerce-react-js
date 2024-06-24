@@ -25,7 +25,7 @@ export async function getCategorias(skip:number=0, limit:number=20) {
 }
 
 export function getReporteStocks(producto_id:number): String {
-    return getUrl('productos/reporte_stocks/'+producto_id);
+    return getUrl('productos_public/reporte_stocks/'+producto_id);
 }
 
 export function saveImagenProducto(producto_id:number, imagen:File): Promise<ApiResponse<Producto>>{

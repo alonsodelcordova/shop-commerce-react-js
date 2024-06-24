@@ -6,7 +6,8 @@ export interface User {
     apellidos?: string;
     token?: {
         token?: string;
-    }
+    },
+    tipo_usuario?:string
 }
 
 export interface UserContextType {

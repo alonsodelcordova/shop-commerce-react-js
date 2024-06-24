@@ -11,5 +11,5 @@ export async function saveIngreso(data:Ingreso): Promise<ApiResponse<Ingreso>> {
 }
 
 export function getReporteIngreso(star:string, end:string) {
-    return getUrl('ingresos/reporte?fechaStart='+star+'&fechaEnd='+end)
+    return getUrl('ingresos_public/reporte?fechaStart='+star+'&fechaEnd='+end)
 }

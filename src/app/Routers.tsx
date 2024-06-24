@@ -13,6 +13,8 @@ import StocksPage from "./pages/admin/productos/StocksPage";
 import ReporteAlmacenPage from "./pages/admin/almacen/ReporteAlmacenPage";
 import ReporteTiendaPage from "./pages/admin/tienda/ReporteTiendaPage";
 import NotFound from "./pages/NotFound";
+import ProfilePage from "./pages/admin/perfil/ProfilePage";
+import SettingsPage from "./pages/admin/perfil/SettingsPage";
 
 export const RoutersShop = createBrowserRouter([
     {
@@ -62,6 +64,19 @@ export const RoutersShop = createBrowserRouter([
                     {
                         path: 'reporte',
                         element: <ReporteTiendaPage />
+                    }
+                ]
+            },
+            {
+                path: 'perfil',
+                children:[
+                    {
+                        element: <ProfilePage />,
+                        path : ''
+                    },
+                    {
+                        element: <SettingsPage />,
+                        path : 'config'
                     }
                 ]
             }

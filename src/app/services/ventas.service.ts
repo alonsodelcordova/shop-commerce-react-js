@@ -15,5 +15,5 @@ export async function saveVenta(venta: Venta): Promise<ApiResponse<Venta>>{
 }
 
 export function getReporteVentas(star:string, end:string) {
-    return getUrl('ventas/reporte?fechaStart='+star+'&fechaEnd='+end)
+    return getUrl('ventas_public/reporte?fechaStart='+star+'&fechaEnd='+end)
 }

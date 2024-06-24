@@ -95,7 +95,7 @@ export default function NavbarComponent() {
                                         <Link className="dropdown-item" to="/perfil"> <FaUserCircle /> Perfil</Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="/config"> <GrConfigure /> Configuracion</Link>
+                                        <Link className="dropdown-item" to="/perfil/config"> <GrConfigure /> Configuracion</Link>
                                     </li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li>
