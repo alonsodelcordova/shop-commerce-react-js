@@ -48,7 +48,7 @@ export default function CategoriaPage() {
             {loading && <LoaderComponent/>}
 
             <div className="row mt-3">
-                {categorias.map((categoria) => {
+                {categorias?.map((categoria) => {
                     return (
                         <div key={categoria.id} className="col-md-6 col-lg-4 p-2">
                            <CardCategory {...categoria} />

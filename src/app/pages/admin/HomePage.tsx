@@ -3,7 +3,6 @@ import { AiFillShopping, AiOutlineAreaChart } from "react-icons/ai";
 import { FaCertificate, FaDelicious, FaDollarSign, FaUser, FaUserCheck } from "react-icons/fa";
 import { FaArrowRightToCity } from "react-icons/fa6";
 import { get_data_admin } from "../../services/admin.service";
-import { errorAlerta } from "../../utils/alerts";
 import { AdminInfoDashboard } from "../../types/AdminInterfaces";
 
 export function HomePage() {
@@ -23,7 +22,7 @@ export function HomePage() {
         if (data.status === 200) {
             setDataInfo(data.data)
         }else{
-            errorAlerta(data.message?.toString() || 'Error')
+            //errorAlerta(data.message?.toString() || 'Error')
         }
 
     }

@@ -24,8 +24,16 @@ export async function getCategorias(skip:number=0, limit:number=20) {
     return await getData('categorias', {skip, limit});
 }
 
+export async function getCategoriasPublic(){
+    return await getData('categorias_public/');
+}
+
 export function getReporteStocks(producto_id:number): String {
     return getUrl('productos_public/reporte_stocks/'+producto_id);
+}
+
+export function getProductosPublic(skip:number=0, limit:number=20):Promise<ApiResponse<ListDataResponse<Producto>>> {
+    return getData('productos_public/products', {skip, limit});
 }
 
 export function saveImagenProducto(producto_id:number, imagen:File): Promise<ApiResponse<Producto>>{

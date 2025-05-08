@@ -15,6 +15,7 @@ import ReporteTiendaPage from "./pages/admin/tienda/ReporteTiendaPage";
 import NotFound from "./pages/NotFound";
 import ProfilePage from "./pages/admin/perfil/ProfilePage";
 import SettingsPage from "./pages/admin/perfil/SettingsPage";
+import { IndexPage } from "./pages/public/IndexPage";
 
 export const RoutersShop = createBrowserRouter([
     {
@@ -93,6 +94,10 @@ export const RoutersShop = createBrowserRouter([
             {
                 element: <RegisterPage />,
                 path : 'register'
+            },
+            {
+                element: <IndexPage />,
+                path : ''
             }
         ]
     },
