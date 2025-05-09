@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/admin/HomePage";
-import { LoginPage } from "./pages/public/LoginPage";
-import RegisterPage from "./pages/public/RegisterPage";
+import { LoginPage } from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 import PublicLayout from "./layouts/PublicLayout";
 import ShopLayout from "./layouts/ShopLayout";
 import CategoriaPage from "./pages/admin/productos/CategoriaPage";
@@ -16,11 +16,12 @@ import NotFound from "./pages/NotFound";
 import ProfilePage from "./pages/admin/perfil/ProfilePage";
 import SettingsPage from "./pages/admin/perfil/SettingsPage";
 import { IndexPage } from "./pages/public/IndexPage";
+import AuthLayout from "./layouts/AuthLayout";
 
 export const RoutersShop = createBrowserRouter([
     {
         element: <ShopLayout />,
-        path : '/',
+        path : '/admin',
         children: [
             {
                 element: <HomePage />,
@@ -84,8 +85,8 @@ export const RoutersShop = createBrowserRouter([
         ]
     },
     {
-        element: <PublicLayout />,
-        path : '/public',
+        element: <AuthLayout />,
+        path : '/auth',
         children: [
             {
                 element: <LoginPage />,
@@ -95,6 +96,13 @@ export const RoutersShop = createBrowserRouter([
                 element: <RegisterPage />,
                 path : 'register'
             },
+           
+        ]
+    },
+    {
+        element: <PublicLayout />,
+        path : '/',
+        children: [
             {
                 element: <IndexPage />,
                 path : ''

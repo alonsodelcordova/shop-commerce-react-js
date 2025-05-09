@@ -22,7 +22,7 @@ export function LoginPage() {
         if (!dataRes.isError) {
             updateUser(dataRes.data)
             timerSuccessAlert("Bienvenido a JacShop!")
-            navigate('/');
+            navigate('/admin');
         } else {
             errorAlerta('Usuario o contraseña incorrecta')
         }
@@ -30,7 +30,7 @@ export function LoginPage() {
 
     useEffect(() => {
         if (user.username != "") {
-            navigate('/');
+            navigate('/admin');
         }
     }, [])
 
@@ -57,12 +57,12 @@ export function LoginPage() {
                 </div>
                 {/* ir a  registrarse */}
                 <div className="d-grid mt-2">
-                    <button type="button" onClick={() => navigate('/public/register')} className="btn btn-lg text-white">Registrarse</button>
+                    <button type="button" onClick={() => navigate('/auth/register')} className="btn btn-lg text-white">Registrarse</button>
                 </div>
 
                 {/* ir al Inicio */}
                 <div className="d-grid mt-2">
-                    <button type="button" onClick={() => navigate('/public')} className="btn text-white">Inicio</button>
+                    <button type="button" onClick={() => navigate('/')} className="btn text-white">Inicio</button>
                 </div>
             </form>
         </div>

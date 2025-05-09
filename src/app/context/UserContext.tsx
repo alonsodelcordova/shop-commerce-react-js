@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { User, UserContextType } from "../types/User";
 import { getUserLocale, setUserLocale } from "../utils/StorageUser";
+import { Categoria } from "../types/Product";
 
 
 
@@ -21,8 +22,11 @@ export const UserProvider = ({ children }:{children: React.ReactNode}) => {
   const userStorage = getUserLocale();
 
   const [user, setUser] = useState<User>(userStorage);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
 
-  const updateUser = (newUserData: User) => setUser(newUserData);
+  const updateUser = async (newUserData: User) => {
+    setUser(newUserData);
+  }
 
   const removeUser = () => {
     const user = {
@@ -32,12 +36,15 @@ export const UserProvider = ({ children }:{children: React.ReactNode}) => {
     }
     setUserLocale(user);
     setUser(user);
+    
   }
 
   const contextValue: UserContextType = {
     user,
     updateUser,
-    removeUser
+    removeUser,
+    categorias,
+    setCategorias
   };
 
   return (

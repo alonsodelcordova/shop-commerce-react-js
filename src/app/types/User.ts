@@ -1,3 +1,5 @@
+import { Categoria } from "./Product";
+
 export interface User {
     username: string;
     email: string;
@@ -14,6 +16,8 @@ export interface UserContextType {
     user: User;
     updateUser: (newUserData: User) => void;
     removeUser: () => void;
+    categorias: Categoria[];
+    setCategorias: (categorias: Categoria[]) => void;
 }
 
 export interface UserRegister {

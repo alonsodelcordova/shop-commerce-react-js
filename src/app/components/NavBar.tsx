@@ -18,7 +18,7 @@ export default function NavbarComponent() {
         confirmAlert("¿Está seguro de cerrar sesión?", ()=>{
             removeUser();
             timerSuccessAlert('Sesión cerrada');
-            navigation('/public/login');
+            navigation('/auth/login');
         })
     }
 
@@ -27,7 +27,7 @@ export default function NavbarComponent() {
         <>
             <nav className="navbar navbar-expand-lg bg-success navbar-dark">
                 <div className="container-md container-fluid">
-                    <Link className="navbar-brand d-flex" to="/">
+                    <Link className="navbar-brand d-flex" to="/admin">
                         <img src={icon} alt="icon" width="45" height="40" className="me-1" />
                         <h2 className="py-0 my-0">JacShop</h2>
                     </Link>
@@ -37,7 +37,7 @@ export default function NavbarComponent() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item px-2">
-                                <Link className="nav-link" to="/">Home</Link>
+                                <Link className="nav-link" to="/admin">Home</Link>
                             </li>
 
                             <li className="nav-item dropdown px-2">
@@ -45,14 +45,14 @@ export default function NavbarComponent() {
                                     <FaBuromobelexperte /> Productos
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link className="dropdown-item" to="/category">
+                                    <li><Link className="dropdown-item" to="/admin/category">
                                         <FaCertificate /> Categorias
                                     </Link></li>
-                                    <li><Link className="dropdown-item" to="/product">
+                                    <li><Link className="dropdown-item" to="/admin/product">
                                         <FaDelicious /> Productos
                                     </Link></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><Link className="dropdown-item" to="/stock">
+                                    <li><Link className="dropdown-item" to="/admin/stock">
                                         <FaSquarePollVertical /> Stocks
                                     </Link></li>
                                 </ul>
@@ -63,9 +63,9 @@ export default function NavbarComponent() {
                                     <FaHouse />  Almacen
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link className="dropdown-item" to="/almacen/ingreso"> <FaArrowRightToCity />  Ingresos</Link></li>
+                                    <li><Link className="dropdown-item" to="/admin/almacen/ingreso"> <FaArrowRightToCity />  Ingresos</Link></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><Link className="dropdown-item" to="/almacen/reporte"> <FaTable /> Reportes</Link></li>
+                                    <li><Link className="dropdown-item" to="/admin/almacen/reporte"> <FaTable /> Reportes</Link></li>
                                 </ul>
                             </li>
 
@@ -74,14 +74,14 @@ export default function NavbarComponent() {
                                     <FaShop /> Tienda
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link className="dropdown-item" to="/tienda/cliente">
+                                    <li><Link className="dropdown-item" to="/admin/tienda/cliente">
                                         <FaUser /> Clientes
                                     </Link></li>
-                                    <li><Link className="dropdown-item" to="/tienda/venta">
+                                    <li><Link className="dropdown-item" to="/admin/tienda/venta">
                                         <FaMoneyBill /> Ventas
                                     </Link></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><Link className="dropdown-item" to="/tienda/reporte"> <FaTable /> Reportes</Link></li>
+                                    <li><Link className="dropdown-item" to="/admin/tienda/reporte"> <FaTable /> Reportes</Link></li>
                                 </ul>
                             </li>
                         </ul>
@@ -92,10 +92,10 @@ export default function NavbarComponent() {
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <Link className="dropdown-item" to="/perfil"> <FaUserCircle /> Perfil</Link>
+                                        <Link className="dropdown-item" to="/admin/perfil"> <FaUserCircle /> Perfil</Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="/perfil/config"> <GrConfigure /> Configuracion</Link>
+                                        <Link className="dropdown-item" to="/admin/perfil/config"> <GrConfigure /> Configuracion</Link>
                                     </li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li>
