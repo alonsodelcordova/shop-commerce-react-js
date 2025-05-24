@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { User, UserContextType } from "../types/User";
 import { getUserLocale, setUserLocale } from "../utils/StorageUser";
-import { Categoria } from "../types/Product";
+import { Categoria, SubCategoria } from "../types/Product";
 
 
 
@@ -24,6 +24,8 @@ export const UserProvider = ({ children }:{children: React.ReactNode}) => {
   const [user, setUser] = useState<User>(userStorage);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
+  const [subcategorySelected, setSubcategorySelected] = useState<SubCategoria|undefined>();
+
   const updateUser = async (newUserData: User) => {
     setUser(newUserData);
   }
@@ -39,12 +41,30 @@ export const UserProvider = ({ children }:{children: React.ReactNode}) => {
     
   }
 
+  const setSubcategorySelectedById = (id: string|undefined) => {
+    if(!id) {
+      setSubcategorySelected(undefined);
+      return;
+    }
+    var idNum = parseInt(id);
+    categorias.forEach((categoria) => {
+      categoria.subcategorias?.forEach((subcategoria) => {
+        if (subcategoria.id == idNum) {
+          subcategoria.categoria_nombre = categoria.nombre;
+          setSubcategorySelected(subcategoria);
+        }
+      })
+    })
+  }
+
   const contextValue: UserContextType = {
     user,
     updateUser,
     removeUser,
     categorias,
-    setCategorias
+    setCategorias,
+    subcategorySelected,
+    setSubcategorySelectedById
   };
 
   return (

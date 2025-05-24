@@ -106,6 +106,10 @@ export const RoutersShop = createBrowserRouter([
             {
                 element: <IndexPage />,
                 path : ''
+            },
+            {
+                element: <IndexPage />,
+                path : 'categoria/:subcategory_id'
             }
         ]
     },

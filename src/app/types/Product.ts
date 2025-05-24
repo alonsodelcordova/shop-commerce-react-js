@@ -26,4 +26,5 @@ export interface SubCategoria{
     descripcion:string;
     is_active?: boolean;
     categoria_id?: number;
+    categoria_nombre?: string;
 }

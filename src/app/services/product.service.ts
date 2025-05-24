@@ -36,6 +36,10 @@ export function getProductosPublic(skip:number=0, limit:number=20):Promise<ApiRe
     return getData('productos_public/products', {skip, limit});
 }
 
+export function getProductosPublicBySubcategory(id:string, skip:number=0, limit:number=20):Promise<ApiResponse<ListDataResponse<Producto>>> {
+    return getData('productos_public/products_by_subcategory/'+id, {skip, limit});
+}
+
 export function saveImagenProducto(producto_id:number, imagen:File): Promise<ApiResponse<Producto>>{
     const formData = new FormData();
     formData.append('file_img', imagen);

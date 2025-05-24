@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { Categoria } from "../types/Product";
 import { getCategoriasPublic } from "../services/product.service";
 import LoaderComponent from "../components/Loader";
@@ -9,8 +9,8 @@ import { useUserContext } from "../context/UserContext";
 export default function PublicLayout() {
     const [loading, setLoading] = useState(false);
     const [categorias, setCategoriasUp] = useState<Categoria[]>([]);
-
-    const { setCategorias } = useUserContext();
+    const {subcategory_id} = useParams();
+    const { setCategorias, subcategorySelected,setSubcategorySelectedById } = useUserContext();
 
     const navigate = useNavigate();
 
@@ -20,6 +20,18 @@ export default function PublicLayout() {
         setCategoriasUp(categoriasNew.data);
         setCategorias(categoriasNew.data);
         setLoading(false);
+    }
+
+    const getSubcategoriaById = (id: number) => {
+        if(subcategorySelected?.id == id) {
+            navigate('/')
+            setSubcategorySelectedById(undefined);
+            
+        }else{
+            navigate(`/categoria/${id}`)
+        }
+        
+
     }
 
     useEffect(() => {
@@ -58,7 +70,11 @@ export default function PublicLayout() {
                                             <ul className="list-group">
                                             {categoria.subcategorias?.map((subca) => {
                                                 return (
-                                                    <li className="list-group-item pointer" key={subca.id} onClick={() => navigate(`/categoria/${subca.id}`)}>
+                                                    <li className="list-group-item pointer" 
+                                                        key={subca.id} 
+                                                        onClick={() => getSubcategoriaById(subca.id||0)}
+                                                        style={{backgroundColor:  subcategory_id == subca.id ? '#007bff' : ''}}
+                                                    >
                                                         {subca.nombre}
                                                     </li>   
                                                 ) }

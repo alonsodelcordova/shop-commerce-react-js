@@ -1,4 +1,4 @@
-import { Categoria } from "./Product";
+import { Categoria, SubCategoria } from "./Product";
 
 export interface User {
     username: string;
@@ -18,6 +18,8 @@ export interface UserContextType {
     removeUser: () => void;
     categorias: Categoria[];
     setCategorias: (categorias: Categoria[]) => void;
+    subcategorySelected?: SubCategoria;
+    setSubcategorySelectedById: (id: string|undefined) => void;
 }
 
 export interface UserRegister {

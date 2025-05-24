@@ -17,7 +17,8 @@ export default function CardProductoPublic({ product }: CardProductPublicProps) 
         categorias.forEach((categoria) => {
             categoria.subcategorias?.forEach((subcategoria) => {
                 if (subcategoria.id == idSubc) {
-                    categr = subcategoria.nombre.toUpperCase();
+                    categr = categoria.nombre.toUpperCase();
+                    
                 }
             })
         })
@@ -48,7 +49,7 @@ export default function CardProductoPublic({ product }: CardProductPublicProps) 
                         <img src={getUrl(product?.imagen||'')} alt="product"  
                             width="200" 
                             height="100" 
-                            style={{ objectFit: 'cover', borderRadius:'10px' }} 
+                            style={{ objectFit: 'cover', borderRadius:'10px', height: '150px', width:'150px' }} 
                         />
                     </div>
                     <h5 className="card-title text-center pointer" 
@@ -61,7 +62,7 @@ export default function CardProductoPublic({ product }: CardProductPublicProps) 
                         <span className="fw-bold">Stock: {product.stock_actual}</span>
                     </div>
                     <div className="mt-3">
-                        <a href="#" className="btn btn-primary">Comprar</a>
+                        <a href="#" className="btn btn-primary">Ver mas</a>
                     </div>
                 </div>
             </div>
